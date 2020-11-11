@@ -35,6 +35,7 @@ class ApplicationController < ActionController::API
     else
       puts 'no user'
     end
+    return @user
   end
 
 
