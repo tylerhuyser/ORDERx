@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_074422) do
+ActiveRecord::Schema.define(version: 2020_11_13_182646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_074422) do
     t.string "pharmacy_address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "filled"
     t.index ["doctor_id"], name: "index_orders_on_doctor_id"
     t.index ["medication_id"], name: "index_orders_on_medication_id"
     t.index ["patient_id"], name: "index_orders_on_patient_id"
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_074422) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "doctor_id", null: false
+    t.bigint "doctor_id"
     t.index ["doctor_id"], name: "index_patients_on_doctor_id"
   end
 
