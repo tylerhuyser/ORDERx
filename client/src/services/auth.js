@@ -14,7 +14,7 @@ export const registerDoctor = async (registerData) => {
   return resp.data.doctor
 }
 
-export const verifyDoctor = async () => {
+export const verifyUser = async () => {
   const token = localStorage.getItem('authToken');
   if (token) {
     api.defaults.headers.common.authorization = `Bearer ${token}`
@@ -38,15 +38,15 @@ export const registerPatient = async (registerData) => {
   return resp.data.patient
 }
 
-export const verifyPatient = async () => {
-  const token = localStorage.getItem('authToken');
-  if (token) {
-    api.defaults.headers.common.authorization = `Bearer ${token}`
-    const resp = await api.get('/auth/verify');
-    return resp.data
-  }
-  return null
-}
+// export const verifyPatient = async () => {
+//   const token = localStorage.getItem('authToken');
+//   if (token) {
+//     api.defaults.headers.common.authorization = `Bearer ${token}`
+//     const resp = await api.get('/auth/verify');
+//     return resp.data
+//   }
+//   return null
+// }
 
 export const removeToken = () => {
   api.defaults.headers.common.authorization = null
