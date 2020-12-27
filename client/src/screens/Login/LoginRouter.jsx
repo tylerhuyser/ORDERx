@@ -1,20 +1,15 @@
-import React, {useState} from 'react'
-import { Switch, Route, useHistory } from "react-router-dom";
-
-import DoctorLogin from "../Login/DoctorLogin"
-import DoctorRegister from "../Register/DoctorRegister"
-import PatientLogin from "../Login/PatientLogin"
-import PatientRegister from "../Register/PatientRegister"
+import React from 'react'
+import { useHistory, Link } from 'react-router-dom';
 
 export default function LoginRouter(props) {
-  
-  const { handleLogin, handleRegister } = props;
-  const [ userCategory, setUserCategory ] = useState("");
-  const history = useHistory();
 
+  const history = useHistory();
+  
+  const { setUserCategory } = props
+  
   const handlePatient = () => {
     setUserCategory("patient")
-    history.push('/patient-login')
+    // history.push('/patient-login')
   }
 
   const handleDoctor = () => {
@@ -22,66 +17,7 @@ export default function LoginRouter(props) {
     history.push('/doctor-login')
   }
 
-  const returnToLoginRouter = () => {
-    setUserCategory("")
-    history.push('/')
-  }
-
-
   return (
-  
-    <>
-      { userCategory ?
-
-        <>
-        
-        { userCategory === "doctor" ?
-       
-          <div>
-            <Switch>
-                
-              <Route exact path="/doctor-login">
-                <DoctorLogin
-                  handleLogin={handleLogin} 
-                  returnToLoginRouter={returnToLoginRouter}
-                /> 
-              </Route>
-                
-              <Route exact path="/doctor-register">
-                <DoctorRegister
-                  handleRegister={handleRegister}  
-                /> 
-              </Route>
-                
-            </Switch >
-          </div>
-          
-          :
-          
-        <div>
-            <Switch>
-                
-            <Route exact path="/patient-login">
-              <PatientLogin
-                  handleLogin={handleLogin}
-                  returnToLoginRouter={returnToLoginRouter}
-              />  
-            </Route>
-                
-            <Route exact path="/patient-register">
-              <PatientRegister
-                handleRegister={handleRegister}  
-              /> 
-            </Route>
-                
-          </Switch >
-        </div>
-        
-        }
-
-       </>   
-      
-    :
   
     <div>
           
@@ -93,15 +29,13 @@ export default function LoginRouter(props) {
 
       <div className="user-type-buttons-container">
           
-        <button classNam="patient-login-button" onClick={handlePatient}>PATIENT</button> 
+        <Link to="patient-login"><button className="patient-login-button" onClick={handlePatient}>PATIENT</button></Link> 
             
-        <button className="doctor-login-button" onClick={handleDoctor}>PROVIDER</button>  
+        <Link to="doctor-login"><button className="doctor-login-button" onClick={handleDoctor}>PROVIDER</button></Link>  
             
       </div>
 
     </div>
-        
-    }
-   </> 
+      
   )
 }

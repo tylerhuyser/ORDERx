@@ -4,7 +4,7 @@ import { Route, useHistory, Switch } from "react-router-dom";
 import "./App.css";
 
 import Layout from "../src/components/Layout/Layout";
-import LoginRouter from "../src/screens/Login/LoginRouter";
+import LoginContainer from "../src/screens/Login/LoginContainer";
 import MainContainer from "../src/containers/MainContainer"
 
 import {
@@ -17,6 +17,7 @@ import {
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
+  const [ userCategory, setUserCategory ] = useState(false);
   const [error, setError] = useState(null)
   const history = useHistory();
 
@@ -68,10 +69,11 @@ function App() {
 
       { !currentUser ?
         
-      <Route exact path="/">
-        <LoginRouter handleLogin={handleLogin} handleRegister={handleRegister} />
-      </Route>
+      <Switch>
+          <LoginContainer userCategory={userCategory} setUserCategory={setUserCategory} handleLogin={handleLogin} handleRegister={handleRegister} />
+       </Switch>
         
+
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
