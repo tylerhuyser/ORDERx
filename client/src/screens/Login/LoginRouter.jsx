@@ -9,7 +9,7 @@ export default function LoginRouter(props) {
   
   const handlePatient = () => {
     setUserCategory("patient")
-    // history.push('/patient-login')
+    history.push('/patient-login')
   }
 
   const handleDoctor = () => {
