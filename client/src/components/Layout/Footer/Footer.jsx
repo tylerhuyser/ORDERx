@@ -8,15 +8,15 @@ export default function Footer () {
       <div className="footer-container slide-in-bottom-nav">
 
         <Link to="/home">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-home mobile-footer-icon"></i>
         </Link>
 
         <Link to="/create-order">
-          <i class="fas fa-pills"></i>
+          <i class="fas fa-pills mobile-footer-icon"></i>
         </Link>
 
         <Link to="/past-orders">
-          <i class="fas fa-clock"></i>
+          <i class="fas fa-clock mobile-footer-icon"></i>
         </Link>
 
       </div>
