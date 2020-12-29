@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../Layout/Header/Header'
+import Sidebar from '../Layout/Sidebar/Sidebar'
 import Footer from '../Layout/Footer/Footer'
 
 import './Layout.css'
@@ -10,11 +11,17 @@ export default function Layout (props) {
 
   return (
     <div className="layout-container">
+
       <Header
         currentUser={currentUser}
         handleLogout={handleLogout}
       />
-      {props.children}
+
+      <div className="body-container">
+        <Sidebar />
+        {props.children}
+      </div>
+
       <Footer />
     </div>
   )

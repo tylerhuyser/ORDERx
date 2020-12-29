@@ -69,9 +69,13 @@ function App() {
 
       { !currentUser ?
         
-      <Switch>
-          <LoginContainer userCategory={userCategory} setUserCategory={setUserCategory} handleLogin={handleLogin} handleRegister={handleRegister} />
-       </Switch>
+        <Switch>
+
+          <Layout currentUser={currentUser} handleLogout={handleLogout}>
+            <LoginContainer userCategory={userCategory} setUserCategory={setUserCategory} handleLogin={handleLogin} handleRegister={handleRegister} />
+          </Layout>
+
+        </Switch>
         
 
         :
