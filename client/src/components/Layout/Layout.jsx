@@ -18,7 +18,14 @@ export default function Layout (props) {
       />
 
       <div className="body-container">
-        <Sidebar />
+
+        {currentUser ?
+          
+          <Sidebar />
+          :
+          <> </>
+        }
+
         {props.children}
       </div>
 

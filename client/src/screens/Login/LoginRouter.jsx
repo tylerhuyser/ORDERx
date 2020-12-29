@@ -1,6 +1,8 @@
 import React from 'react'
 import { useHistory, Link } from 'react-router-dom';
 
+import "../Login/LoginRouter.css"
+
 export default function LoginRouter(props) {
 
   const history = useHistory();
@@ -18,24 +20,53 @@ export default function LoginRouter(props) {
   }
 
   return (
+
+    <>
   
-    <div>
-          
-      <div className="login-router-copy container">
+      <div className="login-router-container-desktop">
 
-        <div className="login-router-copy">ARE YOU A PATIENT OR PROVIDER?</div>    
-
-      </div>   
-
-      <div className="user-type-buttons-container">
-          
-        <Link to="patient-login"><button className="patient-login-button" onClick={handlePatient}>PATIENT</button></Link> 
+        <div className="login-actions-container">
             
-        <Link to="doctor-login"><button className="doctor-login-button" onClick={handleDoctor}>PROVIDER</button></Link>  
-            
+          <div className="login-router-copy-container">
+
+            <div className="login-router-copy">ARE YOU A... ?</div>    
+
+          </div>   
+
+          <div className="user-type-buttons-container">
+              
+            <Link to="patient-login"><button className="login-router-button" id="patient-login-button" onClick={handlePatient}>PATIENT</button></Link> 
+                
+            <Link to="doctor-login"><button className="login-router-button" id="doctor-login-button" onClick={handleDoctor}>PROVIDER</button></Link>  
+                
+          </div>
+
+        </div>
+
+        <img className="login-router-hero-image" src="https://images.unsplash.com/photo-1587370560942-ad2a04eabb6d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" />
+          
       </div>
 
-    </div>
+      <div className="login-router-container-mobile">
+          
+          <div className="login-router-copy-container-mobile">
+    
+            <div className="login-router-copy">ARE YOU A PATIENT OR PROVIDER?</div>    
+    
+          </div>   
+    
+          <div className="user-type-buttons-container">
+              
+            <Link to="patient-login"><button className="login-router-button" id="patient-login-button" onClick={handlePatient}>PATIENT</button></Link> 
+                
+            <Link to="doctor-login"><button className="login-router-button" id="doctor-login-button" onClick={handleDoctor}>PROVIDER</button></Link>  
+                
+          </div>
+        
+        <img className="login-router-hero-image-mobile" src="https://images.unsplash.com/photo-1587370560942-ad2a04eabb6d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" />
+    
+        </div>
       
+    </>
   )
 }

@@ -20,7 +20,7 @@ export default function LoginContainer (props) {
 
   return (
   
-    <div className='login-router-container'>
+    <div className='login-container'>
 
       { userCategory === "doctor" || userCategory === "patient" ?
 

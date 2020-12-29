@@ -1,3 +1,9 @@
+.header-container{
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
 .desktop-nav {
 
   background: #BCE3C5;
