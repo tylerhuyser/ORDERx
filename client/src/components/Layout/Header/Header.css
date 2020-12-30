@@ -2,6 +2,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
+  z-index: 3;
 }
 
 .desktop-nav {
@@ -18,7 +19,6 @@
 
   position: sticky;
   top: 0;
-  z-Index: 3;
 
   box-shadow: 0px 1px 10px lightgray;
 

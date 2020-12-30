@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import { Switch, Route, useHistory } from "react-router-dom";
 
 import LoginRouter from '../Login/LoginRouter'
-import DoctorLogin from "../Login/DoctorLogin"
-import DoctorRegister from "../Register/DoctorRegister"
-import PatientLogin from "../Login/PatientLogin"
-import PatientRegister from "../Register/PatientRegister"
+import Login from "./Login"
+import Register from "../Register/Register"
 
 export default function LoginContainer (props) {
   
   const { userCategory, setUserCategory } = props;
-  const { handleLogin, handleRegister } = props;
+  const { handleDoctorLogin, handleDoctorRegister, handlePatientLogin, handlePatientRegister } = props;
   const history = useHistory();
 
   const returnToLoginRouter = () => {
@@ -31,15 +29,15 @@ export default function LoginContainer (props) {
             <Switch>
                 
               <Route path="/doctor-login">
-                <DoctorLogin
-                  handleLogin={handleLogin} 
+                <Login
+                  handleLogin={handleDoctorLogin} 
                   returnToLoginRouter={returnToLoginRouter}
                 /> 
               </Route>
                 
               <Route path="/doctor-register">
-                <DoctorRegister
-                  handleRegister={handleRegister}  
+                <Register
+                  handleRegister={handleDoctorRegister}  
                 /> 
               </Route>
                 
@@ -51,15 +49,15 @@ export default function LoginContainer (props) {
             <Switch>
                 
             <Route path="/patient-login">
-              <PatientLogin
-                  handleLogin={handleLogin}
+              <Login
+                  handleLogin={handlePatientLogin}
                   returnToLoginRouter={returnToLoginRouter}
               />  
             </Route>
                 
             <Route path="/patient-register">
-              <PatientRegister
-                handleRegister={handleRegister}  
+              <Register
+                handleRegister={handlePatientRegister}  
               /> 
             </Route>
                 

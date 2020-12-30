@@ -10,6 +10,8 @@ import MainContainer from "../src/containers/MainContainer"
 import {
   loginDoctor,
   registerDoctor,
+  loginPatient,
+  registerPatient,
   removeToken,
   verifyUser,
 } from "./services/auth";
@@ -36,22 +38,42 @@ function App() {
 
   // Login Functions
 
-  const handleLogin = async (loginData) => {
-    const employeeData = await loginDoctor(loginData);
-    if (employeeData.error) {
-      setError(employeeData.error)
+  const handleDoctorLogin = async (loginData) => {
+    const doctorData = await loginDoctor(loginData);
+    if (doctorData.error) {
+      setError(doctorData.error)
     } else {
-      setCurrentUser(employeeData);
+      setCurrentUser(doctorData);
       history.push("/home");
     }
   };
 
-  const handleRegister = async (registerData) => {
-    const employeeData = await registerDoctor(registerData);
-    if (employeeData.error) {
-      setError(employeeData.error)
+  const handleDoctorRegister = async (registerData) => {
+    const doctorData = await registerDoctor(registerData);
+    if (doctorData.error) {
+      setError(doctorData.error)
     } else {
-      setCurrentUser(employeeData);
+      setCurrentUser(doctorData);
+      history.push("/home");
+    }
+  };
+
+  const handlePatientLogin = async (loginData) => {
+    const patientData = await loginPatient(loginData);
+    if (patientData.error) {
+      setError(patientData.error)
+    } else {
+      setCurrentUser(patientData);
+      history.push("/home");
+    }
+  };
+
+  const handlePatientRegister = async (registerData) => {
+    const patientData = await registerPatient(registerData);
+    if (patientData.error) {
+      setError(patientData.error)
+    } else {
+      setCurrentUser(patientData);
       history.push("/home");
     }
   };
@@ -72,7 +94,7 @@ function App() {
         <Switch>
 
           <Layout currentUser={currentUser} handleLogout={handleLogout}>
-            <LoginContainer userCategory={userCategory} setUserCategory={setUserCategory} handleLogin={handleLogin} handleRegister={handleRegister} />
+            <LoginContainer userCategory={userCategory} setUserCategory={setUserCategory} handleDoctorLogin={handleDoctorLogin} handleDoctorRegister={handleDoctorRegister} handlePatientLogin={handlePatientLogin} handlePatientRegister={handlePatientRegister} />
           </Layout>
 
         </Switch>
@@ -80,7 +102,7 @@ function App() {
 
         :
 
-        <Layout currentUser={currentUser} handleLogout={handleLogout}>
+        <Layout currentUser={currentUser} handleLogout={handleLogout} userCategory={userCategory}>
           <MainContainer />
         </Layout>
       }

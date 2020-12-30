@@ -48,7 +48,7 @@ export default function Header(props) {
 
           {currentUser ?
             
-            <p className="desktop-nav-link" onClick={handleLogout}>{currentUser.username}</p>
+            <p className="desktop-nav-link" onClick={handleLogout}>{currentUser.last_name}, {currentUser.first_name}</p>
 
             :
           
