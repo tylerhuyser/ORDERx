@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import Home from '../screens/Home/Home'
 
 
-export default function MainContainer(props) {
+export default function MainContainer (props) {
 
   const { currentUser, userCategory } = props 
   const { handleLogout } = props 

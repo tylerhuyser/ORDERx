@@ -10,7 +10,7 @@ export default function DoctorLogin (props) {
     password: ""
   })
 
-  const { username, password } = formData;
+  const { email, password } = formData;
   const { error, handleLogin, returnToLoginRouter } = props;
 
   const handleChange = (e) => {
@@ -45,12 +45,12 @@ export default function DoctorLogin (props) {
             }
             
             <label className="login-form-label">
-                  Username:
+                  E-mail:
               <input
                 className="login-form-input"
                 type="text"
-                value={username}
-                name="username"
+                value={email}
+                name="email"
                 onChange={handleChange}
               />
             </label><br/>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Switch, Route, useHistory } from "react-router-dom";
 
 import LoginRouter from '../Login/LoginRouter'
-import Login from "./Login"
+import Login from "../Login/Login"
 import Register from "../Register/Register"
 
 export default function LoginContainer (props) {
