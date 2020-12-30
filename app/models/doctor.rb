@@ -4,6 +4,7 @@ class Doctor < ApplicationRecord
 
   
   has_secure_password
+  
   validates :password, length: { minimum: 8 }
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true
