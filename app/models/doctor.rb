@@ -1,10 +1,10 @@
 class Doctor < ApplicationRecord
-  has_and_belongs_to_many :patients
+  has_many :patients
   has_many :orders
 
   
   has_secure_password
-  
+
   validates :password, length: { minimum: 8 }
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true
