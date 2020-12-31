@@ -48,7 +48,7 @@ export default function Header(props) {
 
           {currentUser ?
             
-            <p className="desktop-nav-link" onClick={handleLogout}>{currentUser.last_name}, {currentUser.first_name}</p>
+            <p className="desktop-nav-link" id="current-user-name" onClick={handleLogout}>{currentUser.last_name}, {currentUser.first_name}</p>
 
             :
           
@@ -79,7 +79,7 @@ export default function Header(props) {
 
         {currentUser ?
         
-        <i className="far fa-user-circle" onClick={handleLogout}></i> 
+        <i className="far fa-user-circle mobile-icon" onClick={handleLogout}></i> 
           
         :
           

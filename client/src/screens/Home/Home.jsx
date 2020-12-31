@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 
-export default function Home(props) {
+import {
+  getAllPatients,
+  getOnePatient,
+  getAllDoctors,
+  getOneDoctor,
+} from "../../services/users";
 
-  const { currentUser, userCategory } = props 
-  
+export default function Home (props) {
+
+  const { currentUser, userCategory } = props
+
+  console.log(currentUser)
+
+
+
   return (
     <div className="home-container">
+
       <p>HERE!</p>
+
     </div>
   )
 }

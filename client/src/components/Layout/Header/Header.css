@@ -45,7 +45,7 @@
 
 }
 
-#login-link {
+#login-link, #current-user-name {
   border: solid white 3px;
   padding: 10px;
 }
