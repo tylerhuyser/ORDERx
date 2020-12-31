@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   post '/auth/doctor', to: 'authentication#login_doctor'
   get '/auth/verify', to: 'authentication#verify'
   get 'doctors/:doctor_id/patients', to: 'patients#index'
+  get 'patients/:patient_id/doctors', to: 'doctors#index'
   get '/patients/:patient_id/medications', to: 'medications#index'
-  get '/patients/:patient_id/orders', to: 'order#index'
+  get '/patients/:patient_id/orders', to: 'orders#index'
   get 'orders/:order_id/medications', to: 'medications#index'
 
 

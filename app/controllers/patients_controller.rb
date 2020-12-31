@@ -16,7 +16,7 @@ class PatientsController < ApplicationController
 
   # GET /patients/1
   def show
-    render json: @patient
+    render json: @patient, include: [:doctors, :medications, :orders, {orders: {include: :medication}}]
   end
 
   # POST /patients

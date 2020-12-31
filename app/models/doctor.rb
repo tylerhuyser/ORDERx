@@ -1,6 +1,6 @@
 class Doctor < ApplicationRecord
   has_and_belongs_to_many :patients
-  has_many :orders, through: :patients
+  has_many :orders
 
   
   has_secure_password

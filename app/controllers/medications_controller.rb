@@ -7,7 +7,7 @@ class MedicationsController < ApplicationController
       @patient = Patient.find(params[:patient_id])
 
       render json: @patient, include: :medications
-    else params[:order_id]
+    elsif params[:order_id]
       @order = Order.find(params[:order_id])
 
       render json: @order, include: :medications

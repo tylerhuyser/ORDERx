@@ -13,6 +13,10 @@ Doctor.destroy_all
 
 @doctor = Doctor.create!(first_name: 'John', last_name: 'Doe', email: 'admin@gmail.com', password: '12345678')
 @patient = Patient.create!(first_name: 'Patty', last_name: 'Smith', email: 'patsy@gmail.com', date_of_birth: '02-03-1994', doctor_id: @doctor.id, password: '12345678')
+@singulair = Medication.create!(name: 'Singulair', dosage: '50mg/day', patient_id: @patient.id)
+@order = Order.create!(date: '12/31/2020', medication_id: @singulair.id, patient_id: @patient.id, doctor_id: @doctor.id, pharmacy_address: '123 Bridge Roade, New York, NY 10009', filled: false)
 
 puts "#{Doctor.count} doctors created"
 puts "#{Patient.count} patients created"
+puts "#{Medication.count} medications created"
+puts "#{Order.count} orders created"

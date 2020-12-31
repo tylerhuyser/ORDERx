@@ -3,14 +3,20 @@ class DoctorsController < ApplicationController
 
   # GET /doctors
   def index
-    @doctors = Doctor.all
+    if params[:patient_id]
+      @patient = Patient.find(params[:patient_id])
 
-    render json: @doctors
+      render json: @patient, include: {doctors: {include: :medications}}
+    else
+      @doctors = Doctor.all
+
+      render json: @doctors
+    end
   end
 
   # GET /doctors/1
   def show
-    render json: @doctor
+    render json: @doctor, include: [:patients, :orders, {patients: {include: :medications}}]
   end
 
   # POST /doctors
