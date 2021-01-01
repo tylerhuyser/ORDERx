@@ -6,7 +6,7 @@ import "../Login/Login.css"
 export default function DoctorLogin (props) {
   
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: ""
   })
 
@@ -48,7 +48,7 @@ export default function DoctorLogin (props) {
                   E-mail:
               <input
                 className="login-form-input"
-                type="text"
+                type="email"
                 value={email}
                 name="email"
                 onChange={handleChange}

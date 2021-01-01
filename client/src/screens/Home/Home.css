@@ -1,0 +1,28 @@
+.home-container {
+
+  width: 100vw;
+  height: 100%;
+
+}
+
+.unfilled-orders-container {
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.unfilled-orders-copy {
+
+  color: #989898;
+  letter-spacing: 4px;
+  text-align: center;
+
+  margin: 10vh 0px;
+
+}

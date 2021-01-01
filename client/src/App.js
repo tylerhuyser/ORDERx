@@ -29,8 +29,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [userCategory, setUserCategory] = useState(false);
   
+  const [doctors, setDoctors ] = useState(null)
+  const [ patients, setPatients ] = useState(null)
   const [ medications, setMedications ] = useState(null);
-  const [ orders, setOrder ] = useState(null);
+  const [ orders, setOrders ] = useState(null);
 
   const [error, setError] = useState(null)
   const history = useHistory();
@@ -50,20 +52,19 @@ function App() {
     if ((currentUser) && (userCategory)) {
       const userID = currentUser.id
 
-      console.log(userID)
-
       const getUserData = async (userID) => {
         if (userCategory === "doctor") {
-          const doctor = await getOneDoctor(userID)
-          console.log(doctor)
-          const patients = doctor.patients
-          const orderz = doctor.orders
-          console.log(patients)
-          console.log(orderz)
-
+          const doctorData = await getOneDoctor(userID)
+          const patientInfo = doctorData.patients
+          const orderInfo = doctorData.orders
+          setPatients(patientInfo)
+          setOrders(orderInfo)
         } else if (userCategory === "patient") {
-          const patient = await getOnePatient(userID)
-          console.log(patient)
+          const patientData = await getOnePatient(userID)
+          const medicationInfo = patientData.medications
+          const orderInfo = patientData.orders
+          setMedications(medicationInfo)
+          setOrders(orderInfo)
         }
       };
       getUserData(userID)
@@ -138,8 +139,8 @@ function App() {
 
         :
 
-        <Layout currentUser={currentUser} handleLogout={handleLogout} userCategory={userCategory}>
-          <MainContainer />
+        <Layout currentUser={currentUser} handleLogout={handleLogout}>
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={orders} />
         </Layout>
       }
 

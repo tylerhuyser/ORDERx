@@ -6,8 +6,7 @@ import Home from '../screens/Home/Home'
 
 export default function MainContainer(props) {
 
-  const { currentUser, userCategory } = props
-  const { handleLogout } = props
+  const { currentUser, userCategory, doctors, patients, medications, orders } = props
   
 
   return (
@@ -18,7 +17,7 @@ export default function MainContainer(props) {
         < Switch >
         
         <Route exact path="/home">
-          <Home currentUser={currentUser} userCategory={userCategory} />
+          <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={orders} />
         </Route>
 
       </Switch>
