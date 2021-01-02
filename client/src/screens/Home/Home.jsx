@@ -11,10 +11,10 @@ export default function Home (props) {
   const [unfilledOrders, setUnfilledOrders] = useState(null)
 
   useEffect(() => {
-    if (orders) {
+    if (orders.length !== 0) {
       const gatherUnfilledOrders = (orders) => {
-        const unFilledOrdersList = orders.filter((order) => order.filled === false)
-        setUnfilledOrders(unFilledOrdersList)
+        const unfilledOrdersList = orders?.filter((order) => order.filled === false)
+        setUnfilledOrders(unfilledOrdersList)
       }
       gatherUnfilledOrders(orders);
     }

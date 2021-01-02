@@ -8,11 +8,12 @@ export default function Orders(props) {
 
   const { orders } = props
 
-  const ORDERSjsx = orders.map((order, index) => (
+  const ORDERSjsx = orders?.map((order, index) => (
 
     <OrderCard
       order={order}
       index={index}
+      key={order.id}
     />
 
   ))

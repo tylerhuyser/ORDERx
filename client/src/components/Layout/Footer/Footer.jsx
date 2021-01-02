@@ -15,7 +15,7 @@ export default function Footer () {
           <i className="fas fa-pills mobile-footer-icon"></i>
         </Link>
 
-        <Link to="/past-orders">
+        <Link to="/orders">
           <i className="fas fa-clock mobile-footer-icon"></i>
         </Link>
 

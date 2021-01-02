@@ -17,7 +17,7 @@ export default function Sidebar() {
         <i className="fas fa-pills sidebar-icon"></i>
       </Link>
 
-      <Link to="/past-orders">
+      <Link to="/orders">
         <i className="fas fa-clock sidebar-icon"></i>
       </Link>
 

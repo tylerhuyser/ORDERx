@@ -21,7 +21,7 @@ export default function Header(props) {
 
         <div className="desktop-logo-container">
 
-          <img className="desktop-logo" id="logo-copy" src="https://i.imgur.com/96N7jFM.png" />
+          <img className="desktop-logo" id="logo-copy" alt="logo-copy" src="https://i.imgur.com/96N7jFM.png" />
           
         </div>
 
@@ -29,7 +29,7 @@ export default function Header(props) {
 
           <div className="desktop-logo-symbol-container">
 
-            <img className="logo" id="logo-symbol" src="https://i.imgur.com/2Bu6x5X.png" />
+            <img className="logo" id="logo-symbol" atl="logo-symbol" src="https://i.imgur.com/2Bu6x5X.png" />
 
           </div>
           
@@ -73,7 +73,7 @@ export default function Header(props) {
 
         <div className="mobile-logo-container">
 
-          <img className="mobile-logo" id="symbol-only white" src="https://i.imgur.com/XRY6jqr.png" />
+          <img className="mobile-logo" id="symbol-only white" alt="symbol-only white" src="https://i.imgur.com/XRY6jqr.png" />
 
         </div>
 

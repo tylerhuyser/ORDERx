@@ -17,9 +17,9 @@ import {
 } from "./services/auth";
 
 import {
-  getAllPatients,
+  // getAllPatients,
   getOnePatient,
-  getAllDoctors,
+  // getAllDoctors,
   getOneDoctor,
 } from "./services/users";
 
@@ -27,12 +27,12 @@ import {
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
-  const [userCategory, setUserCategory] = useState(false);
+  const [userCategory, setUserCategory] = useState("");
   
-  const [doctors, setDoctors ] = useState(null)
-  const [ patients, setPatients ] = useState(null)
-  const [ medications, setMedications ] = useState(null);
-  const [ orders, setOrders ] = useState(null);
+  const [doctors, setDoctors ] = useState([])
+  const [ patients, setPatients ] = useState([])
+  const [ medications, setMedications ] = useState([]);
+  const [ orders, setOrders ] = useState([]);
 
   const [error, setError] = useState(null)
   const history = useHistory();
@@ -54,29 +54,36 @@ function App() {
   }, []);
   
   useEffect(() => {
-    if ((currentUser) && (userCategory)) {
+    if ((currentUser !== null) && (userCategory !== "")) {
+      console.log('ere')
       const userID = currentUser.id
-
+    
       const getUserData = async (userID) => {
+
         if (userCategory === "doctor") {
           const doctorData = await getOneDoctor(userID)
           const patientInfo = doctorData.patients
           const orderInfo = doctorData.orders
           setPatients(patientInfo)
           setOrders(orderInfo)
+          localStorage.setItem('patients', JSON.stringify(patientInfo))
+          localStorage.setItem('orders', JSON.stringify(orderInfo))
+
         } else if (userCategory === "patient") {
           const patientData = await getOnePatient(userID)
           const medicationInfo = patientData.medications
           const orderInfo = patientData.orders
           setMedications(medicationInfo)
           setOrders(orderInfo)
-        }
-      };
-      getUserData(userID)
+          localStorage.setItem('medications', JSON.stringify(medicationInfo))
+          localStorage.setItem('orders', JSON.stringify(orderInfo))
+        };
+      }
+      getUserData(userID);
     }
-  }, [])
+  }, [currentUser])
 
-    // Functions
+// Functions
 
   // Login Functions
 
@@ -124,6 +131,7 @@ function App() {
     setCurrentUser(null);
     localStorage.removeItem("authToken");
     removeToken();
+    setUserCategory(false)
     history.push("/");
   };
 
@@ -136,7 +144,7 @@ function App() {
         <Switch>
 
           <Layout currentUser={currentUser} handleLogout={handleLogout}>
-            <LoginContainer userCategory={userCategory} setUserCategory={setUserCategory} handleDoctorLogin={handleDoctorLogin} handleDoctorRegister={handleDoctorRegister} handlePatientLogin={handlePatientLogin} handlePatientRegister={handlePatientRegister} />
+            <LoginContainer currentUser={currentUser} userCategory={userCategory} setUserCategory={setUserCategory} handleDoctorLogin={handleDoctorLogin} handleDoctorRegister={handleDoctorRegister} handlePatientLogin={handlePatientLogin} handlePatientRegister={handlePatientRegister} />
           </Layout>
 
         </Switch>
@@ -145,7 +153,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={orders} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} />
         </Layout>
       }
 

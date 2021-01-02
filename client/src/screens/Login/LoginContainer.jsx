@@ -8,7 +8,7 @@ import Register from "../Register/Register"
 export default function LoginContainer (props) {
   
   const { userCategory, setUserCategory } = props;
-  const { handleDoctorLogin, handleDoctorRegister, handlePatientLogin, handlePatientRegister } = props;
+  const { currentUser, handleDoctorLogin, handleDoctorRegister, handlePatientLogin, handlePatientRegister } = props;
   const history = useHistory();
 
   const returnToLoginRouter = () => {
@@ -20,7 +20,7 @@ export default function LoginContainer (props) {
   
     <div className='login-container'>
 
-      { userCategory === "doctor" || userCategory === "patient" ?
+      { (!currentUser && (userCategory === "doctor" || userCategory === "patient")) ?
 
         <>
         
@@ -45,7 +45,7 @@ export default function LoginContainer (props) {
           
         :
           
-        <div>
+        <>
             <Switch>
                 
             <Route path="/patient-login">
@@ -62,19 +62,20 @@ export default function LoginContainer (props) {
             </Route>
                 
           </Switch >
-        </div>
+        </>
         
         }
 
        </>   
       
     :
-      
-      <Route exact path="/">
-          
-          <LoginRouter setUserCategory={setUserCategory} />
-          
-      </Route >
+      <Switch>
+        <Route exact path="/">
+            
+            <LoginRouter setUserCategory={setUserCategory} />
+            
+        </Route >
+      </Switch>
   
     }
    </div> 
