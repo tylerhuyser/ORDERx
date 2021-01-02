@@ -23,6 +23,10 @@
   letter-spacing: 4px;
   text-align: center;
 
-  margin: 10vh 0px;
+  margin: 10vh 0px 2vh 0px;
 
+}
+
+.unfilled-orders-total {
+  font-weight: bolder;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, useHistory, Switch } from "react-router-dom";
+import { useHistory, Switch } from "react-router-dom";
 
 import "./App.css";
 
@@ -44,6 +44,11 @@ function App() {
       if (userData === null) {
         history.push("/");
       }
+      else if ('doctor_id' in userData) {
+        setUserCategory('patient')
+      } else {
+        setUserCategory('doctor')
+      }
     };
     handleVerify();
   }, []);
@@ -69,7 +74,7 @@ function App() {
       };
       getUserData(userID)
     }
-  }, [currentUser])
+  }, [])
 
     // Functions
 
@@ -119,7 +124,7 @@ function App() {
     setCurrentUser(null);
     localStorage.removeItem("authToken");
     removeToken();
-    history.push("/login");
+    history.push("/");
   };
 
   return (

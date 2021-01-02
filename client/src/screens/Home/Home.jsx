@@ -27,11 +27,11 @@ export default function Home (props) {
   return (
     <div className="home-container">
 
-      { unfilledOrders && unfilledOrders.length !== 0 ?
+      { ( (unfilledOrders) && (unfilledOrders.length !== 0) ) ?
         
         <div className="unfilled-orders-container">
 
-          <p className="unfilled-orders-copy">{`You currently have ${unfilledOrders.length} unfilled orders`}</p>
+          <p className="unfilled-orders-copy">You currently have <span className="unfilled-orders-total">{unfilledOrders.length}</span> unfilled orders</p>
         
           <Orders orders={unfilledOrders} />
           
@@ -40,7 +40,7 @@ export default function Home (props) {
       :
         
         <div className="unfilled-orders-container">
-          <p className="unfilled-orders-copy">You currently have 0 unfilled orders.</p>
+          <p className="unfilled-orders-copy">You currently have <span className="unfilled-orders-total">0</span> unfilled orders.</p>
         </div>
         
       }

@@ -1,25 +1,25 @@
 import React from 'react'
 
-import '../Order/Orders.css'
+import './Orders.css'
 
-import OrderCard from '../Order/OrderCard.css'
+import OrderCard from './OrderCard'
 
 export default function Orders(props) {
 
   const { orders } = props
 
-  const ORDERS = orders.map((order, index) => {
+  const ORDERSjsx = orders.map((order, index) => (
 
     <OrderCard
       order={order}
       index={index}
     />
 
-  })
+  ))
   
   return (
     <div className="orders-container">
-      { ORDERS }
+      { ORDERSjsx }
     </div>
   )
 }

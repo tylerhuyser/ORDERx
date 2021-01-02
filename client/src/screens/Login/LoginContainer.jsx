@@ -69,9 +69,13 @@ export default function LoginContainer (props) {
        </>   
       
     :
+      
+      <Route exact path="/">
+          
+          <LoginRouter setUserCategory={setUserCategory} />
+          
+      </Route >
   
-        <LoginRouter setUserCategory={setUserCategory} />
-        
     }
    </div> 
   )
