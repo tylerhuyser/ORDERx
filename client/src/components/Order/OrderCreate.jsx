@@ -11,7 +11,7 @@ import {
 } from '../../services/users'
 
 import {
-  createPatient
+  createNewPatient
 } from '../../services/auth'
 
 import {
@@ -26,6 +26,7 @@ export default function OrderCreate (props) {
 
   const [createPatient, setCreatePatient] = useState(false)
   const [createMedication, setCreateMedication] = useState(false)
+  const [submitMedication, setSubmitMedication] = useState(false)
   const [createOrder, setCreateOrder] = useState(false)
   const [selectedPatientMedications, setSelectedPatientMedications] = useState([])
 
@@ -53,7 +54,7 @@ export default function OrderCreate (props) {
     date_of_birth: "",
     email: "",
     password: "",
-    doctor_id: orderFormData.doctor_id
+    doctor_id: currentUser.id
 
   })
 
@@ -132,13 +133,13 @@ export default function OrderCreate (props) {
     let { name, value } = e.target;
     if (name === "doctor_id") {
       value = parseInt(value)
-      setMedicationFormData(prevState => ({
+      setPatientFormData(prevState => ({
         ...prevState,
         [name]: value
       }))
     }
     else {
-       setMedicationFormData(prevState => ({
+       setPatientFormData(prevState => ({
         ...prevState,
         [name]: value
       }))
@@ -184,13 +185,21 @@ export default function OrderCreate (props) {
   };
 
   const handleSubmitPatient = async () => {
-    const created = await createPatient(patientFormData)
+    const created = await createNewPatient(patientFormData)
+    setMedicationFormData(prevState => ({
+      ...prevState,
+      patient_id: created.id
+    }))
     setOrderFormData(prevState => ({
       ...prevState,
       patient_id: created.id
     }))
     setCreatePatient(false)
-    // 
+    if (createMedication) {
+      setSubmitMedication(true)
+    } else {
+      setCreateOrder(true)
+    }
   }
 
   const handleSubmitMedication = async () => {
@@ -200,6 +209,7 @@ export default function OrderCreate (props) {
       medication_id: created.id
     }))
     setCreateMedication(false)
+    setSubmitMedication(false)
     setCreateOrder(true)
   };
 
@@ -304,6 +314,12 @@ export default function OrderCreate (props) {
     }
   }
 
+  useEffect(() => {
+    if (submitMedication) {
+      validateMedicationForm()
+    }
+  }, [submitMedication])
+
   const validatePatientForm = () => {
 
     setValidatePatientFirstName(false)
@@ -328,12 +344,12 @@ export default function OrderCreate (props) {
       return false
     }
     if (patientFormData.email === "" || !patientFormData.email.includes('@') || !patientFormData.email.includes('.') || patientFormData.email.includes('@.')) {
-      setValidatePatientDOB(true)
+      setValidatePatientEmail(true)
       alert("Please include patient's email!")
       return false
     }
-    if (patientFormData.password === "") {
-      setValidatePatientDOB(true)
+    if (patientFormData.password === "" || patientFormData.password.length < 8) {
+      setValidatePatientPassword(true)
       alert("Please include patient's password!")
       return false
     }
@@ -425,10 +441,8 @@ export default function OrderCreate (props) {
                     ))}
                   </select>
                 </label>
-                  
-                <div className="create-patient-form-container">
-      
-                  <label className="create-form-label" id="patient-form-radio">
+
+                <label className="create-form-label" id="patient-form-radio">
                     Add New Patient? 
                     <input
                       type="radio"
@@ -438,6 +452,8 @@ export default function OrderCreate (props) {
                       checked={createPatient}
                     />
                   </label>
+                  
+                <div className="create-patient-form-container">
 
                   {createPatient ?
                         

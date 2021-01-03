@@ -38,9 +38,9 @@ export const registerPatient = async (registerData) => {
   return resp.data.patient
 }
 
-export const createPatient = async (registerData) => {
-  const resp = await api.post('/patients/', { patient: registerData })
-  return resp.data;
+export const createNewPatient = async (patientData) => {
+  const resp = await api.post('/patients/', { patient: patientData })
+  return resp.data.patient;
 }
 
 // export const verifyPatient = async () => {
