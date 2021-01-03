@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
+
+import '../Order/OrderCreate.css'
 
 import {
   postOrder
@@ -12,11 +14,12 @@ import {
 
 export default function OrderCreate (props) {
 
-  const [submitMedication, setSubmitMedication] = useState(false)
+  const [createMedication, setCreateMedication] = useState(false)
   const [isCreated, setIsCreated] = useState(false)
   const { currentUser, userCategory, doctors, patients, medications } = props
   const userID = currentUser.id
   const currentDate = Date.prototype.now
+  const history = useHistory()
   
   const [orderFormData, setOrderFormData] = useState({
   
@@ -37,21 +40,23 @@ export default function OrderCreate (props) {
 
   })
 
-  if (userCategory === 'doctor') {
-    setOrderFormData(prevState => ({
-      ...prevState,
-      doctor_id: userID
-    }))
-  } else if (userCategory === 'patient') {
-    setOrderFormData(prevState => ({
-      ...prevState,
-      patient_id: userID
-    }))
-    setMedicationFormData(prevState => ({
-      ...prevState,
-      patient_id: userID
-    }))
-  }
+  useEffect(() => {
+    if (userCategory === 'doctor') {
+      setOrderFormData(prevState => ({
+        ...prevState,
+        doctor_id: userID
+      }))
+    } else if (userCategory === 'patient') {
+      setOrderFormData(prevState => ({
+        ...prevState,
+        patient_id: userID
+      }))
+      setMedicationFormData(prevState => ({
+        ...prevState,
+        patient_id: userID
+      }))
+    }
+  }, [userCategory])
 
   const [validateMedication, setValidateMedication] = useState(false)
   const [validatePatient, setValidatePatient] = useState(false)
@@ -96,7 +101,7 @@ export default function OrderCreate (props) {
     
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (submitMedication) {
+    if (createMedication) {
       validateMedicationForm()
     } else {
       validateOrderForm()
@@ -193,6 +198,15 @@ export default function OrderCreate (props) {
     }
   }
 
+  const activateMedicationForm = (e) => {
+    e.preventDefault()
+    setCreateMedication(!createMedication)
+  }
+
+  const returnHome = () => {
+    history.push('/home')
+  }
+
 
   return (
     <div className="create-order-container">
@@ -201,22 +215,49 @@ export default function OrderCreate (props) {
 
         <div className="create-order-form-header">
 
+          <i className="fas fa-chevron-left create-form-back-button" onClick={returnHome} />
+
+          <p className="create-order-form-title">Submit An Order</p>
+
         </div>
 
-        <form className="create-order-form" onSubmit={
-          
+        <div className="order-form-container">
+
+          <div className="placeholder-div"></div>
+
+          <form className="create-order-form" onSubmit={
+            
           (e) => {
-          handleSubmit(e)
-        }} >
+            handleSubmit(e)
+          }} >
 
-          { (userCategory && userCategory === 'patient') ?
+            { (userCategory && userCategory === 'patient') ?
 
+              <label className="create-form-label">
+                Doctor
+                <select className={validateDoctor ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue='default' name="doctor_id" onChange={handleChangeOrder}>
+                <option disabled value='default'>-- Select Doctor --</option>
+                {doctors.map(doctor => (
+                  <option value={doctor.id} key={doctor.id}>{`${doctor.last_name}, ${doctor.first_name}`}</option>
+                ))}
+                </select>
+              </label>
+
+              :
+
+              <>
+              </>
+
+            }
+
+            {(userCategory && userCategory === 'doctor') ?
+                
             <label className="create-form-label">
-              Doctor
-              <select className={validateDoctor ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue='default' name="doctor_id" onChange={handleChangeOrder}>
-              <option disabled value='default'>-- Select Your Company--</option>
-              {doctors.map(doctor => (
-                <option value={doctor.id} key={doctor.id}>{`${doctor.last_name}, ${doctor.first_name}`}</option>
+              Patient
+              <select className={validatePatient ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue='default' name="medication_id" onChange={handleChangeOrder}>
+              <option disabled value='default'>-- Select Patient --</option>
+              {patients.map(patient => (
+                <option value={patient.id} key={patient.id}>{`${patient.last_name}, ${patient.first_name}`}</option>
               ))}
               </select>
             </label>
@@ -226,65 +267,99 @@ export default function OrderCreate (props) {
             <>
             </>
 
-          }
+            }
 
-          {(userCategory && userCategory === 'doctor') ?
+            {(userCategory && userCategory === 'doctor') ?
               
-          <label className="create-form-label">
-            Patient
-            <select className={validatePatient ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue='default' name="medication_id" onChange={handleChangeOrder}>
-            <option disabled value='default'>-- Select Your Company--</option>
-            {patients.map(patient => (
-              <option value={patient.id} key={patient.id}>{`${patient.last_name}, ${patient.first_name}`}</option>
-            ))}
-            </select>
-          </label>
+            <>
+              
+              <label className="create-form-label">
+                Medication
+                <select className={validateMedication ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue='default' name="medication_id" onChange={handleChangeOrder}>
+                <option disabled value='default'>-- Select Your Medication --</option>
+                {medications.map(medication => (
+                  <option value={medication.id} key={medication.id}>{`${medication.last_name}, ${medication.first_name}`}</option>
+                ))}
+                </select>
+              </label>
+                  
+              <div className="create-medication-form-container">
+                     
+                  <p className="create-medication-form-title">CREATE MEDICATION</p>
 
-          :
+                  <label className="create-form-label" id="medication-form-radio">
+                    Add New Medication? 
+                    <input
+                      type="radio"
+                      className="radio-input"
+                      name="createMedication"
+                      onChange={activateMedicationForm}
+                    />
+                  </label>
 
-          <>
-          </>
-
-          }
-
-          {(userCategory && userCategory === 'doctor') ?
+                { createMedication ?
+                    
+                  <form className="create-medication-form" onSubmit={
             
-          <>
-            
-          <label className="create-form-label">
-            Medication
-            <select className={validateMedication ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue='default' name="medication_id" onChange={handleChangeOrder}>
-            <option disabled value='default'>-- Select Your Company--</option>
-            {medications.map(medication => (
-              <option value={medication.id} key={medication.id}>{`${medication.last_name}, ${medication.first_name}`}</option>
-            ))}
-            </select>
-          </label>
+                    (e) => {
+                    handleSubmit(e)
+                      
+                  }} >
 
+                    <label className="create-form-label">
+                      Medication Name
+                    <input className={validateMedicationName ? "create-order-form-input invalid" : "create-order-form-input"}
+                          type="name"
+                          value={medicationFormData.name}
+                          name="name"
+                          onChange={handleChangeMedication}
+                    />
+                    </label> 
 
+                    <label className="create-form-label">
+                      Dosage
+                    <input className={validateMedicationDosage ? "create-order-form-input invalid" : "create-order-form-input"}
+                          type="dosage"
+                          value={medicationFormData.dosage}
+                          name="dosage"
+                          onChange={handleChangeMedication}
+                    />
+                    </label>
+                    
+                  </form>
+                :
 
-          </>
+                  <>
+                  </>
+                        
+                }
 
-            :
+              </div>
+
+            </>
+
+              :
 
             <>
             </>
 
-          }
+            }
 
-          <label className="create-form-label">
-            Pharmacy Address
-            <input className={validatePharmacyAddress ? "create-order-form-input invalid" : "create-order-form-input"}
-                   type="pharmacy_address"
-                   value={orderFormData.pharmacy_address}
-                   name="pharmacy_address"
-                   onChange={handleChangeOrder}
-            />
-          </label>
+            <label className="create-form-label">
+              Pharmacy Address
+              <input className={validatePharmacyAddress ? "create-order-form-input invalid" : "create-order-form-input"}
+                    type="pharmacy_address"
+                    value={orderFormData.pharmacy_address}
+                    name="pharmacy_address"
+                    onChange={handleChangeOrder}
+              />
+            </label>
 
-          <button className="submit-button" id="create-order-form-button">SUBMIT ORDER</button>
+            <button className="submit-button" id="create-order-form-button">SUBMIT</button>
 
-        </form>
+          </form>
+
+        </div>
 
       </div>
 

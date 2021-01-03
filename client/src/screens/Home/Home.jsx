@@ -20,10 +20,6 @@ export default function Home (props) {
     }
   }, [orders])
 
-  console.log(orders)
-  console.log(unfilledOrders)
-  // console.log(unfilledOrders.length)
-
   return (
     <div className="home-container">
 

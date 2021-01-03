@@ -16,10 +16,8 @@ export default function MainContainer(props) {
 
   useEffect(() => {
     const user = userCategory
-    console.log(user)
 
     if (user === 'doctor') {
-      console.log("kkkjj")
       const patientSTRING = localStorage.getItem('patients');
       const patientJSON = JSON.parse(patientSTRING)
       setPatients(patientJSON);
@@ -35,8 +33,7 @@ export default function MainContainer(props) {
     }
 
   }, [userCategory])
-  
-  console.log("main cont")
+
 
   return (
     <>

@@ -55,7 +55,6 @@ function App() {
   
   useEffect(() => {
     if ((currentUser !== null) && (userCategory !== "")) {
-      console.log('ere')
       const userID = currentUser.id
     
       const getUserData = async (userID) => {
