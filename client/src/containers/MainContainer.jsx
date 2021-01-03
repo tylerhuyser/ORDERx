@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import Home from '../screens/Home/Home'
@@ -8,6 +8,7 @@ import OrderCreate from "../components/Order/OrderCreate"
 
 export default function MainContainer(props) {
 
+  const {isCreated, setIsCreated} = props
   const { currentUser, userCategory } = props
   const { doctors, setDoctors } = props
   const { patients, setPatients } = props
@@ -51,7 +52,7 @@ export default function MainContainer(props) {
           </Route>
 
           <Route path="/order-create">
-            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} />
+            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} isCreated={isCreated} setIsCreated={setIsCreated} />
           </Route>
 
         </Switch>

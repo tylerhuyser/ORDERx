@@ -26,13 +26,15 @@ import {
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userCategory, setUserCategory] = useState("");
+  const [ currentUser, setCurrentUser ] = useState(null);
+  const [ userCategory, setUserCategory ] = useState("");
   
-  const [doctors, setDoctors ] = useState([])
+  const [ doctors, setDoctors ] = useState([])
   const [ patients, setPatients ] = useState([])
   const [ medications, setMedications ] = useState([]);
   const [ orders, setOrders ] = useState([]);
+
+  const [isCreated, setIsCreated] = useState(false)
 
   const [error, setError] = useState(null)
   const history = useHistory();
@@ -65,6 +67,7 @@ function App() {
           const orderInfo = doctorData.orders
           setPatients(patientInfo)
           setOrders(orderInfo)
+          setIsCreated(false)
           localStorage.setItem('patients', JSON.stringify(patientInfo))
           localStorage.setItem('orders', JSON.stringify(orderInfo))
 
@@ -74,13 +77,14 @@ function App() {
           const orderInfo = patientData.orders
           setMedications(medicationInfo)
           setOrders(orderInfo)
+          setIsCreated(false)
           localStorage.setItem('medications', JSON.stringify(medicationInfo))
           localStorage.setItem('orders', JSON.stringify(orderInfo))
         };
       }
       getUserData(userID);
     }
-  }, [currentUser])
+  }, [currentUser, isCreated])
 
 // Functions
 
@@ -152,7 +156,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} isCreated={isCreated} setIsCreated={setIsCreated} />
         </Layout>
       }
 
