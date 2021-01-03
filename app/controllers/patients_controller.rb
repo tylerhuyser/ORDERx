@@ -21,7 +21,7 @@ class PatientsController < ApplicationController
 
   # POST /patients
   def create
-    @patient = Patient.new(patient)
+    @patient = Patient.new(patient_params)
     
     if @patient.save
       @token = encode({id: @patient.id})
