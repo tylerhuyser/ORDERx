@@ -36,7 +36,6 @@ export default function OrderCreate (props) {
     doctor_id: "",
     pharmacy_address: "",
     filled: false
-
   })
 
   const [medicationFormData, setMedicationFormData] = useState({
@@ -239,8 +238,7 @@ export default function OrderCreate (props) {
     }
   }
 
-  const activateMedicationForm = (e) => {
-    e.preventDefault()
+  const activateMedicationForm = () => {
     setCreateMedication(!createMedication)
   }
 
@@ -335,7 +333,8 @@ export default function OrderCreate (props) {
                       type="radio"
                       className="radio-input"
                       name="createMedication"
-                      onChange={activateMedicationForm}
+                      onClick={activateMedicationForm}
+                      checked={createMedication}
                     />
                   </label>
 
