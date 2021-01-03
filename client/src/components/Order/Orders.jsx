@@ -4,7 +4,7 @@ import './Orders.css'
 
 import OrderCard from './OrderCard'
 
-export default function Orders(props) {
+export default function Orders (props) {
 
   const { orders } = props
 

@@ -6,7 +6,7 @@ import '../Home/Home.css'
 
 export default function Home (props) {
 
-  const { currentUser, userCategory, doctors, patients, medications, orders } = props
+  const { orders } = props
 
   const [unfilledOrders, setUnfilledOrders] = useState(null)
 
@@ -31,7 +31,7 @@ export default function Home (props) {
         
         <div className="unfilled-orders-container">
 
-          <p className="unfilled-orders-copy">You currently have <span className="unfilled-orders-total">{unfilledOrders.length}</span> unfilled orders</p>
+          <p className="unfilled-orders-copy">You currently have <span className="unfilled-orders-total">{unfilledOrders.length}</span> unfilled order(s).</p>
         
           <Orders orders={unfilledOrders} />
           

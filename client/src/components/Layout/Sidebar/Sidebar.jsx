@@ -13,7 +13,7 @@ export default function Sidebar() {
         <i className="fas fa-home sidebar-icon"></i>
       </Link>
       
-      <Link to="/create-order">
+      <Link to="/order-create">
         <i className="fas fa-pills sidebar-icon"></i>
       </Link>
 

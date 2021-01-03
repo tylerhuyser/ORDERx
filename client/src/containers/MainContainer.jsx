@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import Home from '../screens/Home/Home'
 import Orders from '../components/Order/Orders'
+import OrderCreate from "../components/Order/OrderCreate"
 
 
 export default function MainContainer(props) {
@@ -50,6 +51,10 @@ export default function MainContainer(props) {
             
           <Route path="/orders">
               <Orders orders={orders} />
+          </Route>
+
+          <Route path="/order-create">
+            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} />
           </Route>
 
         </Switch>
