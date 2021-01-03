@@ -38,6 +38,11 @@ export const registerPatient = async (registerData) => {
   return resp.data.patient
 }
 
+export const createPatient = async (registerData) => {
+  const resp = await api.post('/patients/', { patient: registerData })
+  return resp.data;
+}
+
 // export const verifyPatient = async () => {
 //   const token = localStorage.getItem('authToken');
 //   if (token) {

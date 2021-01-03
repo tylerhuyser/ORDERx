@@ -152,7 +152,7 @@
 
 }
 
-.create-mediction-form-container {
+.create-patient-form-container, .create-mediction-form-container {
 
   width: 100%;
   margin: 5px 0px;
@@ -163,13 +163,15 @@
 
 }
 
-#medication-form-radio {
+#patient-form-radio, #medication-form-radio {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+
   width: 100%;
   border-bottom: none;
+  font-style: italic;
 }
 
 .radio-input {
@@ -177,23 +179,4 @@
   outline: none; 
   background-color: #BCE3C5;
   color: #BCE3C5;
-}
-
-.create-medication-form-title {
-
-  font-family: helvetica;
-  color: #BCE3C5;
-  font-size: 50px;
-}
-
-.create-medication-form {
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-bottom: 1em;
-  padding: 25px 0px;
-
-  border-top: 3px solid #BCE3C5;
-  border-bottom: 3px solid #BCE3C5;
 }

@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 
+import PatientCreate from '../Patient/PatientCreate'
+import MedicationCreate from '../Medication/MedicationCreate'
+
 import '../Order/OrderCreate.css'
 
 import {
   getOnePatient
 } from '../../services/users'
+
+import {
+  createPatient
+} from '../../services/auth'
 
 import {
   postOrder
@@ -17,6 +24,7 @@ import {
 
 export default function OrderCreate (props) {
 
+  const [createPatient, setCreatePatient] = useState(false)
   const [createMedication, setCreateMedication] = useState(false)
   const [createOrder, setCreateOrder] = useState(false)
   const [selectedPatientMedications, setSelectedPatientMedications] = useState([])
@@ -36,6 +44,17 @@ export default function OrderCreate (props) {
     doctor_id: "",
     pharmacy_address: "",
     filled: false
+  })
+
+  const [patientFormData, setPatientFormData] = useState({
+
+    first_name: "",
+    last_name: "",
+    date_of_birth: "",
+    email: "",
+    password: "",
+    doctor_id: orderFormData.doctor_id
+
   })
 
   const [medicationFormData, setMedicationFormData] = useState({
@@ -72,12 +91,25 @@ export default function OrderCreate (props) {
     getCurrentPatientMedications(orderFormData.patient_id)
   }, [orderFormData.patient_id])
 
+// Order Form Validators 
   const [validateMedication, setValidateMedication] = useState(false)
   const [validatePatient, setValidatePatient] = useState(false)
   const [validateDoctor, setValidateDoctor] = useState(false)
   const [validatePharmacyAddress, setValidatePharmacyAddress] = useState(false)
+
+// Medication Form Validators
   const [validateMedicationName, setValidateMedicationName] = useState(false)
-  const [validateMedicationDosage, setValidateMedicationDosage ] = useState(false)
+  const [validateMedicationDosage, setValidateMedicationDosage] = useState(false)
+
+// Patient Form Validators
+  const [validatePatientFirstName, setValidatePatientFirstName ] = useState(false)
+  const [validatePatientLastName, setValidatePatientLastName] = useState(false)
+  const [validatePatientDOB, setValidatePatientDOB] = useState(false)
+  const [validatePatientEmail, setValidatePatientEmail ] = useState(false)
+  const [validatePatientPassword, setValidatePatientPassword ] = useState(false)
+  
+
+// Handle Change Functions
   
   const handleChangeOrder = (e) => {
     let { name, value } = e.target;
@@ -90,6 +122,23 @@ export default function OrderCreate (props) {
     }
     else {
       setOrderFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }))
+    }
+  }
+
+  const handleChangePatient = (e) => {
+    let { name, value } = e.target;
+    if (name === "doctor_id") {
+      value = parseInt(value)
+      setMedicationFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }))
+    }
+    else {
+       setMedicationFormData(prevState => ({
         ...prevState,
         [name]: value
       }))
@@ -112,10 +161,14 @@ export default function OrderCreate (props) {
       }))
     }
   }
-    
+   
+// Handle Submit Functions
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (createMedication) {
+    if (createPatient) {
+      validatePatientForm()
+    } else if (createMedication) {
       validateMedicationForm()
     } else {
       console.log('hurt')
@@ -130,6 +183,16 @@ export default function OrderCreate (props) {
     // history.push('/orders')
   };
 
+  const handleSubmitPatient = async () => {
+    const created = await createPatient(patientFormData)
+    setOrderFormData(prevState => ({
+      ...prevState,
+      patient_id: created.id
+    }))
+    setCreatePatient(false)
+    // 
+  }
+
   const handleSubmitMedication = async () => {
     const created = await postMedication(medicationFormData);
     setOrderFormData(prevState => ({
@@ -140,6 +203,9 @@ export default function OrderCreate (props) {
     setCreateOrder(true)
   };
 
+
+// Form Validation Functions
+  
   const validateOrderForm = () => {
 
     setValidateDoctor(false)
@@ -238,9 +304,55 @@ export default function OrderCreate (props) {
     }
   }
 
+  const validatePatientForm = () => {
+
+    setValidatePatientFirstName(false)
+    setValidatePatientLastName(false)
+    setValidatePatientDOB(false)
+    setValidatePatientEmail(false)
+    setValidatePatientLastName(false)
+
+    if (patientFormData.first_name === "") {
+      setValidatePatientFirstName(true)
+      alert("Please include patient's first name!")
+      return false
+    }
+    if (patientFormData.last_name === "") {
+      setValidatePatientLastName(true)
+      alert("Please include patient's last name!")
+      return false
+    }
+    if (patientFormData.date_of_birth === "") {
+      setValidatePatientDOB(true)
+      alert("Please include patient's date of birth!")
+      return false
+    }
+    if (patientFormData.email === "" || !patientFormData.email.includes('@') || !patientFormData.email.includes('.') || patientFormData.email.includes('@.')) {
+      setValidatePatientDOB(true)
+      alert("Please include patient's email!")
+      return false
+    }
+    if (patientFormData.password === "") {
+      setValidatePatientDOB(true)
+      alert("Please include patient's password!")
+      return false
+    }
+    else {
+      handleSubmitPatient(patientFormData)
+    }
+  }
+
+// Activate Patient/Medication Create Components
+
+  const activatePatientForm = () => {
+    setCreatePatient(!createPatient)
+  }
+
   const activateMedicationForm = () => {
     setCreateMedication(!createMedication)
   }
+
+// Redirect Functions
 
   const returnHome = () => {
     history.push('/home')
@@ -249,6 +361,8 @@ export default function OrderCreate (props) {
   if (isCreated) {
     return <Redirect to={`/orders`} />;
   }
+
+  
 
   return (
     <div className="create-order-container">
@@ -265,7 +379,9 @@ export default function OrderCreate (props) {
 
         <div className="order-form-container">
 
-          <div className="placeholder-div"></div>
+          <div className="placeholder-div">
+
+          </div>
 
           <form className="create-order-form" onSubmit={
             
@@ -273,125 +389,130 @@ export default function OrderCreate (props) {
             handleSubmit(e)
           }} >
 
-            { (userCategory && userCategory === 'patient') ?
-
-              <label className="create-form-label">
-                Doctor
-                <select className={validateDoctor ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue={'default'} name="doctor_id" onChange={handleChangeOrder}>
-                <option value='default'>-- Select Doctor --</option>
-                {doctors.map(doctor => (
-                  <option value={doctor.id} key={doctor.id}>{`${doctor.last_name}, ${doctor.first_name}`}</option>
-                ))}
-                </select>
-              </label>
-
-              :
-
+            {(userCategory && userCategory === 'patient') ?
+            
               <>
-              </>
 
-            }
+                <label className="create-form-label">
+                  Doctor
+                  <select className={validateDoctor ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue={'default'} name="doctor_id" onChange={handleChangeOrder}>
+                  <option value='default'>-- Select Doctor --</option>
+                  {doctors.map(doctor => (
+                    <option value={doctor.id} key={doctor.id}>{`${doctor.last_name}, ${doctor.first_name}`}</option>
+                  ))}
+                  </select>
+                </label>
 
-            {(userCategory && userCategory === 'doctor') ?
-                
-            <label className="create-form-label">
-              Patient
-              <select className={validatePatient ? "create-order-form-input invalid" : "create-order-form-input"} value={orderFormData.patient_id} name="patient_id" onChange={handleChangeOrder}>
-                <option value="default">-- Select Patient --</option>
-                {patients.map(patient => (
-                  <option value={patient.id} key={patient.id}>{`${patient.last_name}, ${patient.first_name}`}</option>
-                ))}
-              </select>
-            </label>
+              </>  
 
             :
-
-            <>
-            </>
-
-            }
+    
+              <>
+              </>
+                            
+            }             
 
             {(userCategory && userCategory === 'doctor') ?
               
-            <>
-              
-              <label className="create-form-label">
-                Medication
-                <select className={validateMedication ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue={'default'} name="medication_id" onChange={handleChangeOrder}>
-                <option value='default'>-- Select Your Medication --</option>
-                {selectedPatientMedications?.map(medication => (
-                  <option value={medication.id} key={medication.id}>{`${medication.name}`}</option>
-                ))}
-                </select>
-              </label>
+              <>
                   
-              <div className="create-medication-form-container">
-
-                  <label className="create-form-label" id="medication-form-radio">
-                    Add New Medication? 
+                <label className="create-form-label">
+                  Patient
+                  <select className={validatePatient ? "create-order-form-input invalid" : "create-order-form-input"} value={orderFormData.patient_id} name="patient_id" onChange={handleChangeOrder}>
+                    <option value="default">-- Select Patient --</option>
+                    {patients.map(patient => (
+                      <option value={patient.id} key={patient.id}>{`${patient.last_name}, ${patient.first_name}`}</option>
+                    ))}
+                  </select>
+                </label>
+                  
+                <div className="create-patient-form-container">
+      
+                  <label className="create-form-label" id="patient-form-radio">
+                    Add New Patient? 
                     <input
                       type="radio"
                       className="radio-input"
-                      name="createMedication"
-                      onClick={activateMedicationForm}
-                      checked={createMedication}
+                      name="createPatient"
+                      onClick={activatePatientForm}
+                      checked={createPatient}
                     />
                   </label>
 
-                { createMedication ?
-                    
-                  <div className="create-medication-form" onSubmit={
-            
-                    (e) => {
-                    handleSubmit(e)
-                    
-                  }} >
-                      
-                    <p className="create-medication-form-title">CREATE MEDICATION</p>
-
-                    <label className="create-form-label">
-                      Medication Name
-                    <input className={validateMedicationName ? "create-order-form-input invalid" : "create-order-form-input"}
-                          type="name"
-                          value={medicationFormData.name}
-                          name="name"
-                          onChange={handleChangeMedication}
+                  {createPatient ?
+                        
+                    <PatientCreate patientFormData={patientFormData}
+                                   validatePatientFirstName={validatePatientFirstName}
+                                   validatePatientLastName={validatePatientLastName}
+                                   validatePatientDOB={validatePatientDOB}
+                                   validatePatientEmail={validatePatientEmail}
+                                   validatePatientPassword={validatePatientPassword}
+                                   handleChangePatient={handleChangePatient}
                     />
-                    </label> 
-
-                    <label className="create-form-label">
-                      Dosage
-                    <input className={validateMedicationDosage ? "create-order-form-input invalid" : "create-order-form-input"}
-                          type="dosage"
-                          value={medicationFormData.dosage}
-                          name="dosage"
-                          onChange={handleChangeMedication}
-                    />
-                    </label>
-                    
-                  </div>
-                :
-
+                  
+                  :
+                  
                     <>
                     </>
-                        
-                }
+                      
+                  }
+                    
+                  </div> 
+              </>
 
-              </div>
+            :
+              
+              <>
+              </>
+                
+            }
 
-            </>
+            {(userCategory && userCategory === 'doctor') ?
+              
+              <>
+                
+                <label className="create-form-label">
+                  Medication
+                  <select className={validateMedication ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue={'default'} name="medication_id" onChange={handleChangeOrder}>
+                  <option value='default'>-- Select Your Medication --</option>
+                  {selectedPatientMedications?.map(medication => (
+                    <option value={medication.id} key={medication.id}>{`${medication.name}`}</option>
+                  ))}
+                  </select>
+                </label>
+                    
+                <div className="create-medication-form-container">
 
-              :
+                    <label className="create-form-label" id="medication-form-radio">
+                      Add New Medication? 
+                      <input
+                        type="radio"
+                        className="radio-input"
+                        name="createMedication"
+                        onClick={activateMedicationForm}
+                        checked={createMedication}
+                      />
+                    </label>
 
-              <label className="create-form-label">
-              Medication
-              <select className={validateMedication ? "create-order-form-input invalid" : "create-order-form-input"} defaultValue={'default'} name="medication_id" onChange={handleChangeOrder}>
-              <option value='default'>-- Select Your Medication --</option>
-              {medications.map(medication => (
-                <option value={medication.id} key={medication.id}>{`${medication.name}`}</option>
-              ))}
-              </select>
-            </label>
+                  { createMedication ?
+                      
+                      <MedicationCreate medicationFormData={medicationFormData} validateMedicationName={validateMedicationName} validateMedicationDosage={validateMedicationDosage} handleChangeMedication={handleChangeMedication} />
+                      
+                  :
+
+                      <>
+                      </>
+                          
+                  }
+
+                </div>
+
+              </>
+
+            :
+
+              <>
+              </>
 
             }
 
