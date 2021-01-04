@@ -1,7 +1,12 @@
 .home-container {
 
-  width: 100vw;
+  width: calc(100% - 225px);
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -13,7 +18,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
 
 }
 
@@ -23,7 +32,7 @@
   letter-spacing: 4px;
   text-align: center;
 
-  margin: 10vh 0px 2vh 0px;
+  margin: 5vh 0px 2vh 0px;
 
 }
 

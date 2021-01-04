@@ -45,6 +45,16 @@ export default function LoginContainer (props) {
     }
   }
 
+  // style={{
+  //   width: "100%",
+  //   height: "calc(100% - 125px)",
+
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   justifyContant: "center",
+  //   alignItems: "center",
+  // }}
+
   return (
   
     <div className='login-container'>

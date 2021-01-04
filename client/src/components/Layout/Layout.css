@@ -3,15 +3,18 @@
   
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   
   }
 
   .body-container {
+    width: 100vw;
     max-width: 100vw;
     min-height: 90vh;
 
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
 
     flex-grow: 1;
 
@@ -22,6 +25,13 @@
   @media only screen and (max-width: 800px) {
 
     .body-container {
+      max-width: 100vw;
+      min-height: 90vh;
+  
+      display: flex;
+      flex-direction: row;
+  
+      flex-grow: 1;
   
       position: relative;
       top: 80px;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import Search from '../../components/Search/Search'
 import Orders from '../../components/Order/Orders'
 
 import '../Home/Home.css'
@@ -7,6 +8,8 @@ import '../Home/Home.css'
 export default function Home (props) {
 
   const { orders } = props
+  const { searchQuery} = props;
+  const { handleSearch } = props;
 
   const [unfilledOrders, setUnfilledOrders] = useState(null)
 
@@ -22,6 +25,8 @@ export default function Home (props) {
 
   return (
     <div className="home-container">
+
+      <Search handleSearch={handleSearch} searchQuery={searchQuery} />
 
       { ( (unfilledOrders) && (unfilledOrders.length !== 0) ) ?
         

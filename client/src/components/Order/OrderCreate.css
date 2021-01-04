@@ -1,12 +1,18 @@
 .create-order-container {
 
+  width: calc(100% - 225px);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 
-  width: 100vw;
-  height: 100%;
   padding: 75px 10px;
   
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */

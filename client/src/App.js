@@ -33,6 +33,8 @@ function App() {
   const [ patients, setPatients ] = useState([])
   const [ medications, setMedications ] = useState([]);
   const [ orders, setOrders ] = useState([]);
+  const [ searchQuery, setSearchQuery ] = useState("")
+  const [ queriedOrders, setQueriedOrders ] = useState([])
 
   const [isCreated, setIsCreated] = useState(false)
 
@@ -67,6 +69,7 @@ function App() {
           const orderInfo = doctorData.orders
           setPatients(patientInfo)
           setOrders(orderInfo)
+          setQueriedOrders(orderInfo)
           setIsCreated(false)
           localStorage.setItem('patients', JSON.stringify(patientInfo))
           localStorage.setItem('orders', JSON.stringify(orderInfo))
@@ -77,6 +80,7 @@ function App() {
           const orderInfo = patientData.orders
           setMedications(medicationInfo)
           setOrders(orderInfo)
+          setQueriedOrders(orderInfo)
           setIsCreated(false)
           localStorage.setItem('medications', JSON.stringify(medicationInfo))
           localStorage.setItem('orders', JSON.stringify(orderInfo))
@@ -140,6 +144,16 @@ function App() {
     history.push("/");
   };
 
+// Search Function
+  
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (e.target.value.length > 2) {
+      const newQueriedOrders = queriedOrders.filter((order) => ((order.name.toLowerCase().includes(e.target.value.toLowerCase())) || (order.name.toLowerCase().includes(e.target.value.toLowerCase()))))
+      setQueriedOrders(newQueriedOrders)
+    }
+  }
+
   return (
 
     <div className="app-container">
@@ -158,7 +172,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} isCreated={isCreated} setIsCreated={setIsCreated} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} />
         </Layout>
       }
 

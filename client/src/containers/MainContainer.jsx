@@ -1,19 +1,23 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import Home from '../screens/Home/Home'
 import Orders from '../components/Order/Orders'
 import OrderCreate from "../components/Order/OrderCreate"
+import Search from '../components/Search/Search'
 
 
 export default function MainContainer(props) {
 
-  const {isCreated, setIsCreated} = props
-  const { currentUser, userCategory } = props
-  const { doctors, setDoctors } = props
-  const { patients, setPatients } = props
-  const { medications, setMedications } = props
-  const { orders, setOrders } = props
+  const { isCreated, setIsCreated } = props;
+  const { currentUser, userCategory } = props;
+  const { doctors, setDoctors } = props;
+  const { patients, setPatients } = props;
+  const { medications, setMedications } = props;
+  const { setOrders } = props;
+  const { queriedOrders } = props;
+  const { searchQuery} = props;
+  const { handleSearch } = props;
 
   useEffect(() => {
     const user = userCategory
@@ -44,15 +48,17 @@ export default function MainContainer(props) {
         < Switch >
         
           <Route exact path="/home">
-            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={orders} />
+            
+            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} />
           </Route>
             
           <Route path="/orders">
-            <Orders orders={orders} />
+            
+            <Orders orders={queriedOrders} />
           </Route>
 
           <Route path="/order-create">
-            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} isCreated={isCreated} setIsCreated={setIsCreated} />
+            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} searchQuery={searchQuery} />
           </Route>
 
         </Switch>

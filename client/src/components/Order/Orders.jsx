@@ -7,6 +7,8 @@ import OrderCard from './OrderCard'
 export default function Orders (props) {
 
   const { orders } = props
+  const { searchQuery} = props;
+  const { handleSearch } = props;
 
   const ORDERSjsx = orders?.map((order, index) => (
 

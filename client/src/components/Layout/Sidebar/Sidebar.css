@@ -11,6 +11,9 @@
   padding: 25px 10px;
 
   box-shadow: 0px -1px 10px darkgray;
+
+  position: fixed;
+  left: 0;
 }
 
 .sidebar-icon {
