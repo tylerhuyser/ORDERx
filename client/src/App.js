@@ -116,6 +116,7 @@ function App() {
       setError(patientData.error)
     } else {
       setCurrentUser(patientData);
+      setIsCreated(!isCreated)
       history.push("/home");
     }
   };
@@ -126,6 +127,7 @@ function App() {
       setError(patientData.error)
     } else {
       setCurrentUser(patientData);
+      setIsCreated(!isCreated)
       history.push("/home");
     }
   };
@@ -147,7 +149,7 @@ function App() {
         <Switch>
 
           <Layout currentUser={currentUser} handleLogout={handleLogout}>
-            <LoginContainer currentUser={currentUser} userCategory={userCategory} setUserCategory={setUserCategory} handleDoctorLogin={handleDoctorLogin} handleDoctorRegister={handleDoctorRegister} handlePatientLogin={handlePatientLogin} handlePatientRegister={handlePatientRegister} />
+            <LoginContainer currentUser={currentUser} userCategory={userCategory} setUserCategory={setUserCategory} handleDoctorLogin={handleDoctorLogin} handleDoctorRegister={handleDoctorRegister} handlePatientLogin={handlePatientLogin} handlePatientRegister={handlePatientRegister} isCreated={isCreated} setIsCreated={setIsCreated} />
           </Layout>
 
         </Switch>

@@ -39,7 +39,7 @@ export default function MainContainer(props) {
   return (
     <>
       
-      { ((currentUser) && (orders.length !== 0)) ?
+      { ((currentUser)) ?
 
         < Switch >
         
@@ -48,7 +48,7 @@ export default function MainContainer(props) {
           </Route>
             
           <Route path="/orders">
-              <Orders orders={orders} />
+            <Orders orders={orders} />
           </Route>
 
           <Route path="/order-create">

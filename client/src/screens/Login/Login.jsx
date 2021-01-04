@@ -11,7 +11,8 @@ export default function DoctorLogin (props) {
   })
 
   const { email, password } = formData;
-  const { error, handleLogin, returnToLoginRouter } = props;
+  const { error, handleLogin, returnToLoginRouter, userRegisterRouter } = props;
+
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -76,7 +77,7 @@ export default function DoctorLogin (props) {
             
             <p className="register-prompt-copy">Don't have an account?</p>
         
-            <button className="register-button">SIGN UP</button>
+            <button className="register-button" onClick={userRegisterRouter}>SIGN UP</button>
           
           </div>  
 
