@@ -1,13 +1,14 @@
 .layout-container {
+  width: 100%;
   max-width: 100vw;
   
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   
-  }
+}
 
-  .body-container {
+.body-container {
     width: 100vw;
     max-width: 100vw;
     min-height: 90vh;
@@ -20,7 +21,7 @@
 
     position: relative;
     top: 125px;
-  }
+}
 
   @media only screen and (max-width: 800px) {
 

@@ -69,6 +69,10 @@ function App() {
           const orderInfo = doctorData.orders
           setPatients(patientInfo)
           setOrders(orderInfo)
+          
+          patientInfo.map((patient) => (setMedications(prevState => ([...prevState, patient.medication]))))
+
+
           setQueriedOrders(orderInfo)
           setIsCreated(false)
           localStorage.setItem('patients', JSON.stringify(patientInfo))
@@ -80,6 +84,11 @@ function App() {
           const orderInfo = patientData.orders
           setMedications(medicationInfo)
           setOrders(orderInfo)
+
+          orderInfo.map((order) => (
+            setDoctors(prevState => ([...prevState, order.doctor]))
+          ))
+
           setQueriedOrders(orderInfo)
           setIsCreated(false)
           localStorage.setItem('medications', JSON.stringify(medicationInfo))
@@ -148,11 +157,27 @@ function App() {
   
   const handleSearch = (e) => {
     e.preventDefault()
+    setSearchQuery(e.target.value)
     if (e.target.value.length > 2) {
-      const newQueriedOrders = queriedOrders.filter((order) => ((order.name.toLowerCase().includes(e.target.value.toLowerCase())) || (order.name.toLowerCase().includes(e.target.value.toLowerCase()))))
-      setQueriedOrders(newQueriedOrders)
+      if (userCategory === 'doctor') {
+        const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (order.medication_id === medications.map((medication) => (medication.id))) || (order.patient_id === patients.map((patient) => (patient.id)))))
+        setQueriedOrders(newQueriedOrders)
+      } else if (userCategory === 'patient') {
+        const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (order.medication_id === medications.map((medication) => (medication.id))) || (order.doctor_id === doctors.map((doctor) => (doctor.id)))))
+        setQueriedOrders(newQueriedOrders)
+      }
     }
   }
+
+
+  // medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value) === ))
+
+  // medications.map(medications => {
+  //   if (medication.name.toLowerCase().includes(e.target.value)) {
+  //     return medication.id
+  //   }
+  //   return medication.id
+  // })   
 
   return (
 

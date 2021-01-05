@@ -7,7 +7,7 @@ export default function Search (props) {
   const { searchQuery, handleSearch } = props
   
   return (
-    <form className="search-container">
+    <div className="search-container">
 
       <input
         className="search-input"
@@ -22,6 +22,6 @@ export default function Search (props) {
         <i className="fas fa-search"></i>
       </button>
 
-    </form>
+    </div>
   )
 }

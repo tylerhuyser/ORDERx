@@ -49,6 +49,7 @@
 
     background: white;
   
+    width: calc(100% - 50px);
     max-width: 100vw;
     height: 75px;
     padding: 25px;
@@ -56,6 +57,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-grow: 1;
   
     position: sticky;
     bottom: 0;

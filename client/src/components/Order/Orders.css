@@ -14,3 +14,11 @@
   box-sizing: border-box;
   
 }
+
+@media only screen and (max-width: 800px) {
+
+  .orders-container {
+    width: 100%;
+  }
+
+}
