@@ -11,6 +11,7 @@ export default function Home (props) {
   const { searchQuery} = props;
   const { handleSearch } = props;
   const { completeOrderList } = props;
+  const { userCategory } = props;
 
   const [unfilledOrders, setUnfilledOrders] = useState(null)
 
@@ -43,7 +44,7 @@ export default function Home (props) {
             </>
           }
         
-          <Orders orders={searchQuery !== "" ? orders : unfilledOrders} />
+          <Orders orders={searchQuery !== "" ? orders : unfilledOrders} userCategory={userCategory} />
           
         </div>
         

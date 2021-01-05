@@ -15,7 +15,7 @@ export default function OrderCard(props) {
   const [currentMedication, setCurrentMedication] = useState({})
   const [currentDoctor, setCurrentDoctor] = useState({})
   
-  const { order } = props
+  const { order, userCategory } = props
 
   useEffect(() => {
     if (order) {
@@ -45,8 +45,16 @@ export default function OrderCard(props) {
 
       <div className="order-card-content">
 
-        <p className="doctor-copy">{`Dr. ${currentDoctor.first_name} ${currentDoctor.last_name}`}</p>
+        {userCategory === "doctor" ?
 
+          <p className="doctor-copy">{`Dr. ${currentDoctor.first_name} ${currentDoctor.last_name}`}</p>
+
+        :
+        
+          <p className="doctor-copy">{`Dr. ${currentDoctor.first_name} ${currentDoctor.last_name}`}</p>
+
+        }
+          
         <p className="pharmacy-copy">{order.pharmacy_address}</p>
         
       </div>

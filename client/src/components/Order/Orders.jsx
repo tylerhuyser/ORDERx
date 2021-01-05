@@ -9,6 +9,7 @@ export default function Orders (props) {
   const { orders } = props
   const { searchQuery} = props;
   const { handleSearch } = props;
+  const { userCategory } = props;
 
   const ORDERSjsx = orders?.map((order, index) => (
 
@@ -16,6 +17,7 @@ export default function Orders (props) {
       order={order}
       index={index}
       key={order.id}
+      userCategory={userCategory}
     />
 
   ))
