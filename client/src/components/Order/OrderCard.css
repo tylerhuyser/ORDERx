@@ -103,4 +103,17 @@
   letter-spacing: 2px;
   font-weight: 900;
 
+  justify-content: space-between;
+
+}
+
+.order-status-copy {
+  width: 100%;
+  flex-shrink: 1;
+}
+
+#order-card-icon {
+  width: 50px;
+  text-align: center;
+  color: #989898;
 }

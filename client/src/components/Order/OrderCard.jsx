@@ -92,6 +92,10 @@ export default function OrderCard(props) {
 
           <p className="order-status-copy" id="pending-order-copy">Pending</p>
 
+          <i className="fas fa-ban" id="order-card-icon"></i>
+
+          <i className="far fa-edit" id="order-card-icon"></i>
+
         </div>
         
         }
