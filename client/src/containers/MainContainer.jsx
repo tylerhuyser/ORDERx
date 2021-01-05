@@ -49,7 +49,7 @@ export default function MainContainer(props) {
         
           <Route exact path="/home">
             
-            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} />
+            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={props.completeOrderList} />
           </Route>
             
           <Route path="/orders">

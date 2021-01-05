@@ -70,9 +70,8 @@ function App() {
           setPatients(patientInfo)
           setOrders(orderInfo)
           
-          patientInfo.map((patient) => (setMedications(prevState => ([...prevState, patient.medication]))))
-
-
+          patientInfo.map((patient) => (patient.medications.map((medication) => (setMedications((prevState) => ([...prevState, medication]))))))
+      
           setQueriedOrders(orderInfo)
           setIsCreated(false)
           localStorage.setItem('patients', JSON.stringify(patientInfo))
@@ -159,18 +158,30 @@ function App() {
     e.preventDefault()
     setSearchQuery(e.target.value)
     if (e.target.value.length > 2) {
+
+      setQueriedOrders([])
+
       if (userCategory === 'doctor') {
-        const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (order.medication_id === medications.map((medication) => (medication.id))) || (order.patient_id === patients.map((patient) => (patient.id)))))
+        console.log(e.target.value.toLowerCase())
+        console.log(medications)
+        console.log(medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase()))))
+
+        const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase()))).includes(order.medication_id)) ))
+
+        console.log(newQueriedOrders)
         setQueriedOrders(newQueriedOrders)
+
       } else if (userCategory === 'patient') {
+
         const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (order.medication_id === medications.map((medication) => (medication.id))) || (order.doctor_id === doctors.map((doctor) => (doctor.id)))))
+
         setQueriedOrders(newQueriedOrders)
       }
     }
   }
 
 
-  // medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value) === ))
+  // medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase()) === )).includes(order.medication_id)
 
   // medications.map(medications => {
   //   if (medication.name.toLowerCase().includes(e.target.value)) {
@@ -197,7 +208,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} />
         </Layout>
       }
 

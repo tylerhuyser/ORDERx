@@ -10,31 +10,40 @@ export default function Home (props) {
   const { orders } = props
   const { searchQuery} = props;
   const { handleSearch } = props;
+  const { completeOrderList } = props;
 
   const [unfilledOrders, setUnfilledOrders] = useState(null)
 
   useEffect(() => {
-    if (orders.length !== 0) {
-      const gatherUnfilledOrders = (orders) => {
-        const unfilledOrdersList = orders?.filter((order) => order.filled === false)
+    if (completeOrderList.length !== 0) {
+      const gatherUnfilledOrders = (completeOrderList) => {
+        const unfilledOrdersList = completeOrderList?.filter((order) => order.filled === false)
         setUnfilledOrders(unfilledOrdersList)
       }
-      gatherUnfilledOrders(orders);
+      gatherUnfilledOrders(completeOrderList);
     }
-  }, [orders])
+  }, [completeOrderList])
 
   return (
     <div className="home-container">
 
       <Search handleSearch={handleSearch} searchQuery={searchQuery} />
 
-      { ( (unfilledOrders) && (unfilledOrders.length !== 0) ) ?
+      { ((unfilledOrders) && (unfilledOrders.length !== 0)) ?
         
         <div className="unfilled-orders-container">
 
-          <p className="unfilled-orders-copy">You currently have <span className="unfilled-orders-total">{unfilledOrders.length}</span> unfilled order(s).</p>
+          {searchQuery === "" ?
+
+            < p className="unfilled-orders-copy">You currently have <span className="unfilled-orders-total">{unfilledOrders.length}</span> unfilled order(s).</p>
         
-          <Orders orders={unfilledOrders} />
+          :
+
+            <>
+            </>
+          }
+        
+          <Orders orders={searchQuery !== "" ? orders : unfilledOrders} />
           
         </div>
         
