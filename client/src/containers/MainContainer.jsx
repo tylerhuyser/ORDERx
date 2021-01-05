@@ -54,7 +54,8 @@ export default function MainContainer(props) {
             
           <Route path="/orders">
             
-            <Orders orders={queriedOrders} userCategory={userCategory} />
+            <Orders orders={props.orders} userCategory={userCategory} />
+
           </Route>
 
           <Route path="/order-create">

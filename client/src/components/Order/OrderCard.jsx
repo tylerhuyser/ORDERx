@@ -10,25 +10,44 @@ import {
   getOneDoctor
 } from '../../services/users'
 
+import {
+  getOnePatient
+} from '../../services/users'
+
 export default function OrderCard(props) {
 
   const [currentMedication, setCurrentMedication] = useState({})
   const [currentDoctor, setCurrentDoctor] = useState({})
+  const [ currentPatient, setCurrentPatient] = useState({})
   
   const { order, userCategory } = props
 
   useEffect(() => {
     if (order) {
-      const getDoctorData = async (doctor_id) => {
-        const doctorData = await getOneDoctor(doctor_id);
-        setCurrentDoctor(doctorData)
+      if (userCategory === "doctor") {
+        const getPatientData = async (patient_id) => {
+          const patientData = await getOnePatient(patient_id);
+          setCurrentPatient(patientData)
+        }
+        const getMedicationData = async (medication_id) => {
+          const medicationData = await getOneMedication(medication_id)
+          setCurrentMedication(medicationData)
+        }
+        getPatientData(order.patient_id)
+        getMedicationData(order.medication_id)
       }
-      const getMedicationData = async (medication_id) => {
-        const medicationData = await getOneMedication(medication_id)
-        setCurrentMedication(medicationData)
+      if (userCategory === "patient") {
+        const getDoctorData = async (doctor_id) => {
+          const doctorData = await getOneDoctor(doctor_id);
+          setCurrentDoctor(doctorData)
+        }
+        const getMedicationData = async (medication_id) => {
+          const medicationData = await getOneMedication(medication_id)
+          setCurrentMedication(medicationData)
+        }
+        getDoctorData(order.doctor_id)
+        getMedicationData(order.medication_id)
       }
-      getDoctorData(order.doctor_id)
-      getMedicationData(order.medication_id)
     }
   }, [order])
 
@@ -47,7 +66,7 @@ export default function OrderCard(props) {
 
         {userCategory === "doctor" ?
 
-          <p className="doctor-copy">{`Dr. ${currentDoctor.first_name} ${currentDoctor.last_name}`}</p>
+          <p className="doctor-copy">{`${currentPatient.first_name} ${currentPatient.last_name}`}</p>
 
         :
         
