@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Route, Switch, useHistory } from 'react-router-dom'
 
 import Home from '../screens/Home/Home'
 import Orders from '../components/Order/Orders'
 import OrderCreate from "../components/Order/OrderCreate"
+import OrderEdit from "../components/Order/OrderEdit"
 
 import {
   destroyOrder
@@ -11,6 +12,9 @@ import {
 
 
 export default function MainContainer(props) {
+
+  const [ currentOrder, setCurrentOrder ] = useState(null)
+  const [ editOrder, setEditOrder ] = useState(false)
 
   const { isCreated, setIsCreated } = props;
   const { currentUser, userCategory } = props;
@@ -22,6 +26,7 @@ export default function MainContainer(props) {
   const { searchQuery} = props;
   const { handleSearch } = props;
   const { isDeleted, setIsDeleted } = props;
+  const history = useHistory()
 
   useEffect(() => {
     const user = userCategory
@@ -48,6 +53,17 @@ export default function MainContainer(props) {
     setIsDeleted(!isDeleted)
   }
 
+  const handleEdit = (e) => {
+    setCurrentOrder(e)
+    setEditOrder(true)
+  }
+
+  useEffect(() => {
+    if(editOrder) {
+      history.push('/order-edit')
+    }
+  }, [editOrder])
+
   return (
     <>
       
@@ -57,17 +73,21 @@ export default function MainContainer(props) {
         
           <Route exact path="/home">
             
-            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={props.completeOrderList} deleteOrder={deleteOrder} />
+            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={props.completeOrderList} deleteOrder={deleteOrder} handleEdit={handleEdit} />
           </Route>
             
           <Route path="/orders">
             
-            <Orders orders={props.orders} userCategory={userCategory} deleteOrder={deleteOrder} />
+            <Orders orders={props.orders} userCategory={userCategory} deleteOrder={deleteOrder} handleEdit={handleEdit} />
 
           </Route>
 
           <Route path="/order-create">
             <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} searchQuery={searchQuery} />
+          </Route>
+
+          <Route path="/order-edit">
+            <OrderEdit currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} searchQuery={searchQuery} currentOrder={currentOrder} setCurrentOrder={setCurrentOrder} setEditOrder={setEditOrder} />
           </Route>
 
         </Switch>

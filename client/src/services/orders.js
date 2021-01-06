@@ -16,7 +16,7 @@ export const postOrder = async (orderData) => {
 }
 
 export const putOrder = async (id, orderData) => {
-  const resp = await api.post(`/orders/${id}`, {order: orderData});
+  const resp = await api.put(`/orders/${id}`, {order: orderData});
   return resp.data;
 }
 

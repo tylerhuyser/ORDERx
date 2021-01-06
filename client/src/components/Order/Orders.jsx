@@ -10,7 +10,7 @@ export default function Orders (props) {
   const { searchQuery} = props;
   const { handleSearch } = props;
   const { userCategory } = props;
-  const { deleteOrder } = props;
+  const { handleEdit, deleteOrder } = props;
 
   const ORDERSjsx = orders?.map((order, index) => (
 
@@ -20,8 +20,8 @@ export default function Orders (props) {
       key={order.id}
       userCategory={userCategory}
       deleteOrder={deleteOrder}
+      handleEdit={handleEdit}
     />
-
   ))
   
   return (
