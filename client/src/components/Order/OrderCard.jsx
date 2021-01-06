@@ -20,7 +20,7 @@ export default function OrderCard(props) {
   const [currentDoctor, setCurrentDoctor] = useState({})
   const [ currentPatient, setCurrentPatient] = useState({})
   
-  const { order, userCategory } = props
+  const { order, userCategory, deleteOrder } = props
 
   useEffect(() => {
     if (order) {
@@ -92,7 +92,7 @@ export default function OrderCard(props) {
 
           <p className="order-status-copy" id="pending-order-copy">Pending</p>
 
-          <i className="fas fa-ban" id="order-card-icon"></i>
+          <i className="fas fa-ban" id="order-card-icon" onClick={() => deleteOrder(order.id)} ></i>
 
           <i className="far fa-edit" id="order-card-icon"></i>
 

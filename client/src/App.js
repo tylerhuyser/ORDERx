@@ -28,15 +28,16 @@ function App() {
 
   const [ currentUser, setCurrentUser ] = useState(null);
   const [ userCategory, setUserCategory ] = useState("");
+  const [ searchQuery, setSearchQuery ] = useState("")
   
   const [ doctors, setDoctors ] = useState([])
   const [ patients, setPatients ] = useState([])
   const [ medications, setMedications ] = useState([]);
   const [ orders, setOrders ] = useState([]);
-  const [ searchQuery, setSearchQuery ] = useState("")
   const [ queriedOrders, setQueriedOrders ] = useState([])
 
-  const [isCreated, setIsCreated] = useState(false)
+  const [isCreated, setIsCreated] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const [error, setError] = useState(null)
   const history = useHistory();
@@ -96,7 +97,7 @@ function App() {
       }
       getUserData(userID);
     }
-  }, [currentUser, isCreated])
+  }, [currentUser, isCreated, isDeleted])
 
 // Functions
 
@@ -180,16 +181,7 @@ function App() {
       }
     }
   }
-
-
-  // medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase()) === )).includes(order.medication_id)
-
-  // medications.map(medications => {
-  //   if (medication.name.toLowerCase().includes(e.target.value)) {
-  //     return medication.id
-  //   }
-  //   return medication.id
-  // })   
+ 
 
   return (
 
@@ -209,7 +201,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
         </Layout>
       }
 

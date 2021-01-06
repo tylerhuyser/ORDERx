@@ -4,7 +4,10 @@ import { Route, Switch } from 'react-router-dom'
 import Home from '../screens/Home/Home'
 import Orders from '../components/Order/Orders'
 import OrderCreate from "../components/Order/OrderCreate"
-import Search from '../components/Search/Search'
+
+import {
+  destroyOrder
+} from '../services/orders'
 
 
 export default function MainContainer(props) {
@@ -18,6 +21,7 @@ export default function MainContainer(props) {
   const { queriedOrders } = props;
   const { searchQuery} = props;
   const { handleSearch } = props;
+  const { isDeleted, setIsDeleted } = props;
 
   useEffect(() => {
     const user = userCategory
@@ -39,6 +43,10 @@ export default function MainContainer(props) {
 
   }, [userCategory])
 
+  const deleteOrder = async (id) => {
+    await destroyOrder(id)
+    setIsDeleted(!isDeleted)
+  }
 
   return (
     <>
@@ -49,12 +57,12 @@ export default function MainContainer(props) {
         
           <Route exact path="/home">
             
-            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={props.completeOrderList} />
+            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={props.completeOrderList} deleteOrder={deleteOrder} />
           </Route>
             
           <Route path="/orders">
             
-            <Orders orders={props.orders} userCategory={userCategory} />
+            <Orders orders={props.orders} userCategory={userCategory} deleteOrder={deleteOrder} />
 
           </Route>
 
