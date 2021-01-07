@@ -18,10 +18,10 @@ export default function MainContainer(props) {
 
   const { isCreated, setIsCreated } = props;
   const { currentUser, userCategory } = props;
-  const { doctors, setDoctors } = props;
+  const { doctors } = props;
   const { patients, setPatients } = props;
   const { medications, setMedications } = props;
-  const { setOrders } = props;
+  const { orders, completeOrderList, setOrders } = props;
   const { queriedOrders } = props;
   const { searchQuery} = props;
   const { handleSearch } = props;
@@ -67,13 +67,13 @@ export default function MainContainer(props) {
   return (
     <>
       
-      { ((currentUser)) ?
+      { ((currentUser) && (orders)) ?
 
         < Switch >
         
           <Route exact path="/home">
             
-            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={props.completeOrderList} deleteOrder={deleteOrder} handleEdit={handleEdit} />
+            <Home currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={queriedOrders} handleSearch={handleSearch} searchQuery={searchQuery} completeOrderList={completeOrderList} deleteOrder={deleteOrder} handleEdit={handleEdit} />
           </Route>
             
           <Route path="/orders">

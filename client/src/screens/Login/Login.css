@@ -66,6 +66,11 @@
   letter-spacing: 2px;
 }
 
+#login-back-button {
+  width: 80%;
+  text-align: right;
+}
+
 .login-form {
 
   display: flex;

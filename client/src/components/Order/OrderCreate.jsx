@@ -31,7 +31,7 @@ export default function OrderCreate (props) {
   const [selectedPatientMedications, setSelectedPatientMedications] = useState([])
 
   const { isCreated, setIsCreated } = props
-  const { currentUser, userCategory, doctors, patients, medications } = props
+  const { currentUser, userCategory, doctors, patients } = props
 
   const userID = currentUser.id
   const newDate = new Date()
@@ -447,7 +447,7 @@ export default function OrderCreate (props) {
                       className="radio-input"
                       name="createPatient"
                       onClick={activatePatientForm}
-                      checked={createPatient}
+                      defaultChecked={createPatient}
                     />
                   </label>
                   
@@ -504,7 +504,7 @@ export default function OrderCreate (props) {
                         className="radio-input"
                         name="createMedication"
                         onClick={activateMedicationForm}
-                        checked={createMedication}
+                        defaultChecked={createMedication}
                       />
                     </label>
 

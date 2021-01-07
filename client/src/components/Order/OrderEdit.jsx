@@ -452,7 +452,7 @@ export default function OrderCreate (props) {
                       className="radio-input"
                       name="createPatient"
                       onClick={activatePatientForm}
-                      checked={createPatient}
+                      defaultChecked={createPatient}
                     />
                   </label>
                   
@@ -509,7 +509,7 @@ export default function OrderCreate (props) {
                         className="radio-input"
                         name="createMedication"
                         onClick={activateMedicationForm}
-                        checked={createMedication}
+                        defaultChecked={createMedication}
                       />
                     </label>
 

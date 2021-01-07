@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 
 import "../Login/Login.css"
 
@@ -34,6 +33,8 @@ export default function DoctorLogin (props) {
 
         <div className="login-form-container">
 
+          <i className="fas fa-times create-form-back-button" id="login-back-button" onClick={returnToLoginRouter} />
+        
           <form className="login-form" onSubmit={(e) => {
             e.preventDefault();
             handleLogin(formData);
