@@ -34,8 +34,11 @@ export default function OrderCreate (props) {
   const { currentUser, userCategory, doctors, patients, medications } = props
 
   const userID = currentUser.id
-  const currentDate = new Date()
+  const newDate = new Date()
+  const currentDate = (newDate.getMonth()+1) + '/' + newDate.getDate()
   const history = useHistory()
+
+  console.log(currentDate)
   
   const [orderFormData, setOrderFormData] = useState({
   
