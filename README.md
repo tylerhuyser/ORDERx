@@ -1,7 +1,10 @@
-# README
+# ORDERx
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**ORDERx** is a react-on-rails app that helps doctors and patient order and manage their medications.
+
+![Deployed Site](https://confident-keller-484552.netlify.app/) can be accessed here.
+
+## Description
 
 Things you may want to cover:
 
