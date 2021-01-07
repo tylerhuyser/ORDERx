@@ -175,18 +175,15 @@ export default function OrderCreate (props) {
     } else if (createMedication) {
       validateMedicationForm()
     } else {
-      console.log('hurt')
       setCreateOrder(true)
     }
   }
 
   const handleSubmitOrder = async () => {
-    console.log('posting edit')
     const created = await putOrder(orderFormData.id, orderFormData);
     setIsCreated(true);
     setEditOrder(false)
     setCurrentOrder(null);
-    // history.push('/orders')
   };
 
   const handleSubmitPatient = async () => {

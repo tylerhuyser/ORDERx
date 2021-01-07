@@ -37,8 +37,6 @@ export default function OrderCreate (props) {
   const newDate = new Date()
   const currentDate = (newDate.getMonth()+1) + '/' + newDate.getDate()
   const history = useHistory()
-
-  console.log(currentDate)
   
   const [orderFormData, setOrderFormData] = useState({
   
@@ -175,16 +173,13 @@ export default function OrderCreate (props) {
     } else if (createMedication) {
       validateMedicationForm()
     } else {
-      console.log('hurt')
       setCreateOrder(true)
     }
   }
 
   const handleSubmitOrder = async () => {
-    console.log('posting order')
     const created = await postOrder(orderFormData);
     setIsCreated(true);
-    // history.push('/orders')
   };
 
   const handleSubmitPatient = async () => {

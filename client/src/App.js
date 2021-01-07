@@ -17,9 +17,7 @@ import {
 } from "./services/auth";
 
 import {
-  // getAllPatients,
   getOnePatient,
-  // getAllDoctors,
   getOneDoctor,
 } from "./services/users";
 
