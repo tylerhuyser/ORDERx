@@ -32,7 +32,7 @@ export default function OrderCreate (props) {
   const [selectedPatientMedications, setSelectedPatientMedications] = useState([])
 
   const { isCreated, setIsCreated } = props
-  const { currentUser, userCategory, doctors, patients, medications, currentOrder, setCurrentOrder, setEditOrder } = props
+  const { currentUser, userCategory, doctors, patients, currentOrder, setCurrentOrder, setEditOrder } = props
 
   const userID = currentUser.id
   const currentDate = new Date()

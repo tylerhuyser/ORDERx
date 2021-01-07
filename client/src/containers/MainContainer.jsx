@@ -83,7 +83,7 @@ export default function MainContainer(props) {
           </Route>
 
           <Route path="/order-create">
-            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} searchQuery={searchQuery} />
+            <OrderCreate currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} searchQuery={searchQuery} />
           </Route>
 
           <Route path="/order-edit">

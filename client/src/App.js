@@ -37,7 +37,6 @@ function App() {
   const [isCreated, setIsCreated] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
-  const [error, setError] = useState(null)
   const history = useHistory();
 
   useEffect(() => {
@@ -104,7 +103,7 @@ function App() {
   const handleDoctorLogin = async (loginData) => {
     const doctorData = await loginDoctor(loginData);
     if (doctorData.error) {
-      setError(doctorData.error)
+      return
     } else {
       setCurrentUser(doctorData);
       history.push("/home");
@@ -114,7 +113,7 @@ function App() {
   const handleDoctorRegister = async (registerData) => {
     const doctorData = await registerDoctor(registerData);
     if (doctorData.error) {
-      setError(doctorData.error)
+      return
     } else {
       setCurrentUser(doctorData);
       history.push("/home");
@@ -124,7 +123,7 @@ function App() {
   const handlePatientLogin = async (loginData) => {
     const patientData = await loginPatient(loginData);
     if (patientData.error) {
-      setError(patientData.error)
+      return
     } else {
       setCurrentUser(patientData);
       setIsCreated(!isCreated)
@@ -135,7 +134,7 @@ function App() {
   const handlePatientRegister = async (registerData) => {
     const patientData = await registerPatient(registerData);
     if (patientData.error) {
-      setError(patientData.error)
+      return
     } else {
       setCurrentUser(patientData);
       setIsCreated(!isCreated)
