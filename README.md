@@ -207,6 +207,8 @@ Key components include:
 
 ## Component Heirarchy
 
+<img src="https://i.imgur.com/N37oXyU.png" width="80%" />
+
 ## Repo Structure
 
 ```
