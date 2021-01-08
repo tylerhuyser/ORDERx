@@ -115,12 +115,25 @@ As aforementioned, the app primarily enables users to manage their medication or
 
 If a user would like to create a new order, they can do so using the "Create Order" form. 
 
-<img src="" width="60%" />
+<img src="https://i.imgur.com/gWVLkF4.png" width="60%" />
 
+If the creation of a new doctor, patient, or medication is required to complete the new order, users may create these respective items by expanding their corresponding creation forms.
+
+<img src="https://i.imgur.com/gWVLkF4.png" width="60%" /> **xx**
+
+Furthermore, users may update or destrou any pending orders by clicking on the correspoinding "edit" and "delete" icons located on the corresponding order card.
+
+<img src="blob:https://imgur.com/3d4a0fec-49a5-4237-b955-96c785f544f5" width="40%" />
 
 ```
 
 ```
+
+## Data Structure
+
+The data structure of ORDERx becomes quite complex because of the has-many-and-belong-to-many nature of the doctor and patient relationship.
+
+A doctor has many patients, while a paitient has many doctors.
 
 
 
