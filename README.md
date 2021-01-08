@@ -125,7 +125,42 @@ Furthermore, users may update or destrou any pending orders by clicking on the c
 
 <img src="blob:https://imgur.com/3d4a0fec-49a5-4237-b955-96c785f544f5" width="40%" />
 
+### Order Search
+
+Users are able to search their pending orders by doctor/patient name, address, date, or medication. Given that doctor, patient, and medication names are stored as ids, in order to facilitate this feature
+
 ```
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    setSearchQuery(e.target.value)
+    setQueriedOrders([])
+    if (e.target.value.length > 2) {
+
+      setQueriedOrders([])
+
+      if (userCategory === 'doctor') {
+
+        const filteredPatients = patients.filter((patient) => (patient.first_name.toLowerCase().includes(e.target.value.toLowerCase()) || patient.last_name.toLowerCase().includes(e.target.value.toLowerCase()) ))
+        
+        const filteredMedications = medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase())))
+
+        const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (filteredMedications.some(medication => (medication.id === order.medication_id))) || (filteredPatients.some(patient => (patient.id === order.patient_id)))))
+
+        setQueriedOrders(newQueriedOrders)
+
+      } else if (userCategory === 'patient') {
+
+        const filteredDoctors = doctors.filter((doctor) => (doctor.first_name.toLowerCase().includes(e.target.toLowerCase()) || doctor.last_name.toLowerCase().includes(e.target.toLowerCase())))
+        
+        const filteredMedications = medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase())))
+
+        const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (filteredMedications.some(medication => (medication.id === order.medication_id))) || (filteredDoctors.some(doctor => (doctor.id === order.doctor_id)))))
+
+        setQueriedOrders(newQueriedOrders)
+      }
+    }
+  }
 
 ```
 
@@ -135,5 +170,88 @@ The data structure of ORDERx becomes quite complex because of the has-many-and-b
 
 A doctor has many patients, while a paitient has many doctors.
 
+<img src="https://i.imgur.com/1t4Nyn2.png" width="40%">
+
+
+## Key Components
+
+Key components include:
+
+* Login Container
+
+** Login Router
+
+** Login
+
+** Register
+
+* Main Container
+
+** Home
+
+** Orders
+
+** CreateOrder
+
+** EditOrder
+
+* utils
+
+** CreatePatient
+
+** CreateDoctor
+
+** CreateMedication
+
+** Search
+
+## Component Heirarchy
+
+## Repo Structure
+
+```
+|_db
+             |_migrate
+             |_schema.rb
+             |_seeds.rb
+|_app
+             |_controllers
+                          |_authentication_controller.rb
+                          |_application_controller.rb
+                          |_doctors_controller.rb
+                          |_medications_controller.rb
+                          |_orders_controller.rb
+                          |_patients_controller.rb
+             |_models
+                          |_doctor.rb
+                          |_medication.rb
+                          |_order.rb
+                          |_patient.rb
+|_config
+             |_routes
+|_client
+             |_src
+                  |_app.js
+                  |_components
+                              |_Layout
+                              |_Medication
+                              |_Order 
+                              |_Patient
+                              |_Search                  
+                  |_containers
+                              |_MainContainer
+                              
+                  |_screens
+                              |_Home
+                              |_Login
+                  |_services
+
+                              |_api-config.js
+                              |_auth.js
+                              |_medications.js
+                              |_orders.js
+                              |_users.js
+
+```
 
 
