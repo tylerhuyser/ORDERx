@@ -14,7 +14,11 @@ ORDERx gives users the ability order and manage their medications in one place.
 
 ### Two User Classes & System Authentication
 
-ORDERx primarily has two types of users: doctors and patients. Creating an authentication system was able to manage these two classes of users posed a unique challenge.
+ORDERx primarily has two types of users: doctors and patients. Managing these two classes of users in relation to authentication posed a unique challenge.
+
+Typically, a single model would be used to create users. An attribute would be used to distinguish  different categories of users. For example, an app that includes administrators and students could use a Boolean "admin" attribute to 
+
+ For example, for an app that includes administrators and employees, one could include an "admin" attribute which could 
 
 Typically, in order to balance two categories of users, one would use one model and distingush between the two using a boolean attribute. For example, an app that included administrators and employees would use one User model that would contain a boolean (i.e. true/false) attribute for "admin".
 
