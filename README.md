@@ -78,9 +78,7 @@ In order to accomodate authorization for these two different classes of users, I
   end
 
 ```
-<img src="https://i.imgur.com/9sfnQb1.png" width="60%" />
-
-<img src="https://i.imgur.com/PTp4VaK.png" width="20%" />
+<img src="https://i.imgur.com/9sfnQb1.png" width="60%" /> <img src="https://i.imgur.com/PTp4VaK.png" width="20%" />
 
 A "Login Router" component was built in order to direct the system to the appropriate login method. By selecting either "provider" or "patient", a user to able to ensure that the the system uses the proper method to handle authentication.
 
