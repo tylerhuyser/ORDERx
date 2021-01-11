@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-<img src="https://i.imgur.com/LeWkV9s.png" width="40%" />
+<img src="https://media0.giphy.com/media/ic6rp7AMI7jxSoPRN5/giphy.gif" width="40%" />
 
 **ORDERx** is a React-on-Rails application that helps doctors and patients manage their medications.
 
@@ -182,31 +182,31 @@ Key components include:
 
 * Login Container
 
-** Login Router
+ * Login Router
 
-** Login
+ * Login
 
-** Register
+ * Register
 
 * Main Container
 
-** Home
+ * Home
 
-** Orders
+ * Orders
 
-** CreateOrder
+ * CreateOrder
 
-** EditOrder
+ * EditOrder
 
 * utils
 
-** CreatePatient
+ * CreatePatient
 
-** CreateDoctor
+ * CreateDoctor
 
-** CreateMedication
+ * CreateMedication
 
-** Search
+ * Search
 
 ## Component Heirarchy
 
