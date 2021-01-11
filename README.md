@@ -14,6 +14,8 @@ ORDERx gives users the ability order and manage their medications in one place.
 
 ### Two User Classes & System Authentication
 
+<img src="https://i.imgur.com/eJ69BPu.png" width="60%" />
+
 Two types of users use ORDERx: doctors and patients. Creating a system to manage these two unique user models posed a unique challenge. 
 
 Typically, *one* model would be used to create all categories of users. An attribute would be used to distingush between different categories. For example, an app that incudes administrators and students might use an "admin" attribute that would receive a Boolean value. "True" would indicate that the user is an administrator whereas "false" would incidcate that the user is a student.
@@ -76,12 +78,11 @@ In order to accomodate authorization for these two different classes of users, I
   end
 
 ```
+<img src="https://i.imgur.com/9sfnQb1.png" width="60%" />
 
-<img src="https://i.imgur.com/eJ69BPu.png" width="60%" />
+<img src="https://i.imgur.com/PTp4VaK.png" width="20%" />
 
 A "Login Router" component was built in order to direct the system to the appropriate login method. By selecting either "provider" or "patient", a user to able to ensure that the the system uses the proper method to handle authentication.
-
-<img src="https://i.imgur.com/9sfnQb1.png" width="60%" />
 
 ```
 
