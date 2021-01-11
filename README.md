@@ -122,15 +122,17 @@ If a user would like to create a *new* order, they can do so using the "Create O
 
 If the creation of a new doctor, patient, or medication is required to complete the new order, users may create each respective item by expanding it corresponding creation module.
 
-<img src="https://i.imgur.com/gWVLkF4.png" width="60%" /> **xx**
+<img src="https://media0.giphy.com/media/2bwBFtCxOWk6CPEmsy/giphy.gif" width="400px" />
 
 Finally, users may update or destroy any pending orders by clicking the "edit" or "delete" icons located in the lower right corner of each order card.
 
-<img src="blob:https://imgur.com/3d4a0fec-49a5-4237-b955-96c785f544f5" width="40%" />
+<img src="https://media1.giphy.com/media/YPjeNdPzE1dICD9Hsi/giphy.gif" width="400px" />
 
 ### Order Search
 
 Users are able to search their pending orders by doctor/patient name, address, date, or medication. Given that doctor, patient, and medication names are stored as ids, in order to facilitate this feature
+
+<img src="https://media3.giphy.com/media/Q8bjSqvY9ZRj4Nm6UT/giphy.gif" width="400px" />
 
 ```
 
