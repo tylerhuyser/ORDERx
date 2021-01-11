@@ -82,7 +82,7 @@ In order to accomodate authorization for these two different classes of users, I
 
 A "Login Router" component was built in order to direct the system to the appropriate login method. By selecting either "provider" or "patient", a user to able to ensure that the the system uses the proper method to handle authentication.
 
-<img src="https://i.imgur.com/5w9IXgS.mp4" width="400px" />
+<img src="https://giphy.com/709b0fa3-6310-4dee-9b26-5abc737cab17" width="400px" />
 
 ```
 
