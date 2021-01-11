@@ -14,15 +14,11 @@ ORDERx gives users the ability order and manage their medications in one place.
 
 ### Two User Classes & System Authentication
 
-ORDERx primarily has two types of users: doctors and patients. Managing these two classes of users in relation to authentication posed a unique challenge.
+Two types of users use ORDERx: doctors and patients. Creating a system to manage these two unique user models posed a unique challenge. 
 
-Typically, a single model would be used to create users. An attribute would be used to distinguish  different categories of users. For example, an app that includes administrators and students could use a Boolean "admin" attribute to 
+Typically, *one* model would be used to create all categories of users. An attribute would be used to distingush between different categories. For example, an app that incudes administrators and students might use an "admin" attribute that would receive a Boolean value. "True" would indicate that the user is an administrator whereas "false" would incidcate that the user is a student.
 
- For example, for an app that includes administrators and employees, one could include an "admin" attribute which could 
-
-Typically, in order to balance two categories of users, one would use one model and distingush between the two using a boolean attribute. For example, an app that included administrators and employees would use one User model that would contain a boolean (i.e. true/false) attribute for "admin".
-
-However, in this case, doctors and patients could not share one model; there were two many unique attributes among the two. You can view the schema below:
+However, in *this* case, doctors and patients could not share a single model. Each user category has its own, unique attributes. For example, the patient model requires attributes like "social security number", "date of birth", and "primary care physician". You can view the schema for these two models below:
 
 ```
   create_table "doctors", force: :cascade do |t|
@@ -49,7 +45,7 @@ However, in this case, doctors and patients could not share one model; there wer
 
 ```
 
-In order to accomodate authorization for these two different classes of users, two different authorization controllers had to be built:
+In order to accomodate authorization for these two different classes of users, I had to create two different login methods:
 
 ```
 
@@ -83,7 +79,7 @@ In order to accomodate authorization for these two different classes of users, t
 
 <img src="https://i.imgur.com/eJ69BPu.png" width="60%" />
 
-A "Login Router" component was built in order to direct the system to the appropriate controller. By selecting either "provider" or "patient", a User to able to ensure that the proper method handles authentication.
+A "Login Router" component was built in order to direct the system to the appropriate login method. By selecting either "provider" or "patient", a user to able to ensure that the the system uses the proper method to handle authentication.
 
 <img src="https://i.imgur.com/9sfnQb1.png" width="60%" />
 
@@ -113,19 +109,21 @@ const handleDoctor = () => {
 
 <img src="https://i.imgur.com/OifkX2M.png" width="60%" />
 
-As aforementioned, the app primarily enables users to manage their medication orders. When the log in, they are immediately presented with "pending" (i.e. unfilled) orders. Altneratively, they can navigate to the "Orders" tab in order to view a complete directory of their prior orders.
+ORDERx helps users manage their medications. Specifically, it allows users to get, create, edit, and delete medication orders. 
+
+When a user logs in, they are immediately presented with any "pending" (i.e. "unfilled") orders. Alternatively, they can navigate to the "Orders" tab in order to view a complete directory of their previous orders.
 
 <img src="https://i.imgur.com/44ReaC7.png" width="40%" />
 
-If a user would like to create a new order, they can do so using the "Create Order" form. 
+If a user would like to create a *new* order, they can do so using the "Create Order" form. 
 
 <img src="https://i.imgur.com/gWVLkF4.png" width="60%" />
 
-If the creation of a new doctor, patient, or medication is required to complete the new order, users may create these respective items by expanding their corresponding creation forms.
+If the creation of a new doctor, patient, or medication is required to complete the new order, users may create each respective item by expanding it corresponding creation module.
 
 <img src="https://i.imgur.com/gWVLkF4.png" width="60%" /> **xx**
 
-Furthermore, users may update or destrou any pending orders by clicking on the correspoinding "edit" and "delete" icons located on the corresponding order card.
+Finally, users may update or destroy any pending orders by clicking the "edit" or "delete" icons located in the lower right corner of each order card.
 
 <img src="blob:https://imgur.com/3d4a0fec-49a5-4237-b955-96c785f544f5" width="40%" />
 
@@ -170,9 +168,7 @@ Users are able to search their pending orders by doctor/patient name, address, d
 
 ## Data Structure
 
-The data structure of ORDERx becomes quite complex because of the has-many-and-belong-to-many nature of the doctor and patient relationship.
-
-A doctor has many patients, while a paitient has many doctors.
+The has-many-any-belongs-to-many nature of the patient-doctor relationship creates its challenges. A doctor can have many patients, while a patient can have many doctors.
 
 <img src="https://i.imgur.com/1t4Nyn2.png" width="40%">
 
