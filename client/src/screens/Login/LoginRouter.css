@@ -1,12 +1,71 @@
 .login-router-container-desktop {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  height: 100%;
-  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('https://img.freepik.com/premium-vector/simple-line-icons-seamless-pattern-with-simple-linear-icons-pharmacy-store-hospital-needs_348818-1274.jpg?w=2000');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* background: red; */
 }
 
-.login-actions-container {
+.doctor-login-container, .patient-login-container {
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(188, 227, 197, 1);
+  margin: 25px;
+  padding: 25px;
+
+  border: solid white 5px;
+  border-radius: 15px;
+  box-shadow: inset 0px -1px 5px lightgray;
+
+  /* color: #989898; */
+  color: white;
+  letter-spacing: 2px;
+  font-size: 24px;
+}
+
+.doctor-login-title, .patient-login-title {
+  font-weight: 900;
+  font-size: 48px;
+}
+
+.doctor-login-subtitle, .patient-login-subtitle {
+  
+}
+
+.login-router-button {
+  width: 30%;
+  background: white;
+  margin: 25px;
+  padding: 25px;
+
+  border: 3px solid #BCE3C5;
+  border-radius: 18px;
+ 
+  font-size: 24px;
+  color: #BCE3C5;
+  font-weight: 700;
+}
+
+.login-router-button:hover {
+  background: #BCE3C5;
+ 
+  color: white;
+}
+
+/* .login-actions-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,9 +78,9 @@
 .login-router-copy {
   font-size: 48px;
   color: white;
-}
+} */
 
-.login-router-button {
+/* .login-router-button {
   width: 100px;
   color: #BCE3C5;
   background: transparent;
@@ -31,9 +90,9 @@
   border: 3px solid #BCE3C5;
   border-radius: 18px;
 
-}
+} */
 
-.login-router-hero-image {
+/* .login-router-hero-image {
   width: 100vw;
   height: 100%;
 
@@ -50,7 +109,7 @@
 
 .login-router-container-mobile {
   display: none;
-}
+} */
 
 
 @media only screen and (max-width: 800px) {

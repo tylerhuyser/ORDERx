@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import "../Login/Login.css"
 
-export default function DoctorLogin (props) {
+export default function Login (props) {
   
   const [formData, setFormData] = useState({
     email: "",
