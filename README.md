@@ -89,7 +89,7 @@ A "Login Router" component was built in order to direct the system to the approp
 const handlePatient = () => {
   setUserCategory("patient")
   history.push('/patient-login')
-}
+} 
 
 const handleDoctor = () => {
   setUserCategory("doctor")
