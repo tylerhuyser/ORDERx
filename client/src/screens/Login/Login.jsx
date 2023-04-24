@@ -24,16 +24,18 @@ export default function Login (props) {
   return (
 
     <div className="login-component-container">
+
+      <i className="fas fa-times create-form-back-button" id="login-back-button" onClick={returnToLoginRouter} />
+
+      <div className='login-header-form-container'>
         
-        <div className="login-form-header">
+        <div className="login-form-header-container">
           <img className="login-form-logo" alt="login-form-logo-symbol-only" src="https://i.imgur.com/71pvLug.png" />
           <p className="login-form-subtitle">MANAGE YOUR PRESCRIPTIONS</p>
         </div> 
       
 
         <div className="login-form-container">
-
-          <i className="fas fa-times create-form-back-button" id="login-back-button" onClick={returnToLoginRouter} />
         
           <form className="login-form" onSubmit={(e) => {
             e.preventDefault();
@@ -46,27 +48,23 @@ export default function Login (props) {
             <p className="login-error">{error}</p>
             }
             
-            <label className="login-form-label">
-                  E-mail:
-              <input
-                className="login-form-input"
-                type="email"
-                value={email}
-                name="email"
-                onChange={handleChange}
-              />
-            </label><br/>
+            <input
+              className="login-form-input"
+              type="email"
+              value={email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Email"
+            />
 
-            <label className="login-form-label">
-              Password:
-              <input
-                className="login-form-input"
-                type="password"
-                value={password}
-                name="password"
-                onChange={handleChange}
-              />
-            </label><br />
+            <input
+              className="login-form-input"
+              type="password"
+              value={password}
+              name="password"
+              onChange={handleChange}
+              placeholder="Password"
+            />
           
             <p className="password-recovery-copy">Forgot your password?</p>
 
@@ -83,6 +81,8 @@ export default function Login (props) {
           </div>  
 
         </div>
+
+      </div>
 
     </div>
     
