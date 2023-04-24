@@ -3,10 +3,10 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 125px);
   width: 100vw;
   
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('https://img.freepik.com/premium-vector/simple-line-icons-seamless-pattern-with-simple-linear-icons-pharmacy-store-hospital-needs_348818-1274.jpg?w=2000');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url('https://img.freepik.com/premium-vector/simple-line-icons-seamless-pattern-with-simple-linear-icons-pharmacy-store-hospital-needs_348818-1274.jpg?w=2000');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -16,7 +16,8 @@
 
 .doctor-login-container, .patient-login-container {
   width: 40%;
-  height: 40%;
+  min-height: 40vh;
+  max-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,35 +34,56 @@
   /* color: #989898; */
   color: white;
   letter-spacing: 2px;
-  font-size: 24px;
+  font-size: clamp(1em, 24px, 2em);
+  text-align: center;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.doctor-login-container:hover, .patient-login-container:hover {
+  transform: scale(1.05);
 }
 
 .doctor-login-title, .patient-login-title {
   font-weight: 900;
   font-size: 48px;
+  margin: 10px 0px;
 }
 
 .doctor-login-subtitle, .patient-login-subtitle {
-  
+  font-weight: 300;
+  font-size: 36px;margin: 15px 0px 50px 0px;
 }
 
 .login-router-button {
-  width: 30%;
-  background: white;
-  margin: 25px;
-  padding: 25px;
+  width: 80%;
+  max-width: 300px;
+  background: #BCE3C5;
+  /* margin: 25px; */
+  padding: 10px 25px;
 
-  border: 3px solid #BCE3C5;
+  border: 5px solid white;
   border-radius: 18px;
  
-  font-size: 24px;
-  color: #BCE3C5;
-  font-weight: 700;
+  font-size: 30px;
+  color: white;
+  font-weight: 900;
 }
 
 .login-router-button:hover {
-  background: #BCE3C5;
+  background: white;
  
+  color: #BCE3C5;
+}
+
+.fa-solid, .fa-regular {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  margin-bottom: 15px;
+
+
+  font-size: 50px; 
   color: white;
 }
 

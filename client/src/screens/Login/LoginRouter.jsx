@@ -1,5 +1,8 @@
 import React from 'react'
 import { useHistory, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 import "../Login/LoginRouter.css"
 
@@ -26,15 +29,17 @@ export default function LoginRouter(props) {
       <div className="login-router-container-desktop">
 
         <div className='doctor-login-container'>
+          <FontAwesomeIcon icon={faStethoscope} className={'fa-solid fa-stethoscope'} />
           <p className='doctor-login-title'>Are you a Provider?</p>
           <p className='doctor-login-subtitle'>Here to manage your patients?</p>
-          <button className="login-router-button" id="doctor-login-button" onClick={handleDoctor}>LOGIN</button>
+          <button className="login-router-button" id="doctor-login-button" onClick={handleDoctor}>PROVIDER<br />LOGIN</button>
         </div>
 
         <div className='patient-login-container'>
+          <FontAwesomeIcon icon={faUser} className={'fa-regular fa-user'} />
           <p className='patient-login-title'>Are you a Patient?</p>
           <p className='patient-login-subtitle'>Looking to track your prescriptions?</p>
-          <button className="login-router-button" id="doctor-login-button" onClick={handleDoctor}>LOGIN</button>
+          <button className="login-router-button" id="doctor-login-button" onClick={handlePatient}>PATIENT<br />LOGIN</button>
         </div>
 
       </div>
