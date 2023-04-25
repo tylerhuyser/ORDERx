@@ -1,0 +1,127 @@
+.register-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+}
+
+.register-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: calc(35%);
+  min-height: 60vh;
+
+  background: rgba(188, 227, 197, 1);
+  margin-top: 50px;
+  padding: 25px;
+
+  border: solid white 5px;
+  border-radius: 15px;
+  box-shadow: inset 0px -1px 5px lightgray;
+
+  color: white;
+  letter-spacing: 2px;
+  font-size: clamp(1em, 24px, 2em);
+  text-align: center;
+}
+
+.register-form-title {
+  font-size: 48px;
+}
+
+.create-patient-form-input {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding: 5px;
+
+  background: transparent;
+  border: none;
+  border-bottom: white 1px solid;
+
+  color: white;
+  font-size: 36px;
+  letter-spacing: 4px;
+
+  box-shadow: lightgrey 0px 5px 5px -6px;
+}
+
+.create-patient-form-input::placeholder {
+  color: white;
+  font-size: 36px;
+  letter-spacing: 4px;
+}
+
+.invalid {
+  border: 5px solid red;
+}
+
+.register-form-button {
+  width: 80%;
+  max-width: 300px;
+  background: #BCE3C5;
+  /* margin: 25px; */
+  padding: 10px 25px;
+
+  border: 5px solid white;
+  border-radius: 18px;
+ 
+  font-size: 30px;
+  color: white;
+  font-weight: 900;
+}
+
+.register-form-button:hover {
+  background: white;
+ 
+  color: #BCE3C5;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .register-container {
+    padding: 25px;
+    font-size: clamp(0.75em, 18px, 1.5em);
+  }
+
+  .register-form-container {
+    width: calc(100% - 30px);
+    min-height: 60vh;
+  
+    margin-top: 25px;
+    padding: 25px 10px;
+  }
+
+  .create-patient-form-input {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 5px;
+
+    font-size: 24px;
+  }
+
+  .create-patient-form-input::placeholder {
+    color: white;
+    font-size: 24px;
+    letter-spacing: 4px;
+  }
+
+  .register-form-button {
+    font-size: 20px;
+    
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+
+  }
+
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Register.css'
 
 
 export default function Register(props) {
@@ -65,68 +66,64 @@ export default function Register(props) {
   return (
     <div className="register-container">
 
-      <p className="register-form-title">Register</p>
+      <div className='register-form-container'>
 
-      <label className="create-form-label">
-        First Name
-      <input className={validateFirstName ? "create-patient-form-input invalid" : "create-patient-form-input"}
-            type="first_name"
-            value={registerFormData.first_name}
-            name="first_name"
-            onChange={handleChange}
-      />
-      </label> 
+        <p className="register-form-title">Complete Registration Below</p>
 
-      <label className="create-form-label">
-        Last Name
-      <input className={validateLastName ? "create-patient-form-input invalid" : "create-patient-form-input"}
-            type="last_name"
-            value={registerFormData.last_name}
-            name="last_name"
-            onChange={handleChange}
-      />
-      </label>
+        <input className={validateFirstName ? "create-patient-form-input invalid" : "create-patient-form-input"}
+              type="first_name"
+              value={registerFormData.first_name}
+              name="first_name"
+              onChange={handleChange}
+              placeholder="First Name"
+        />
 
-      { currentUser === "patient" ?
-        
-      <label className="create-form-label">
-        Date of Birth (MM/DD/YYYY)
-      <input className={validateDOB ? "create-patient-form-input invalid" : "create-patient-form-input"}
-            type="date_of_birth"
-            value={registerFormData.date_of_birth}
-            name="date_of_birth"
-            onChange={handleChange}
-      />
-      </label>
-                
-      :
-        
-      <>
-      </>
-        
-      }
-        
-      <label className="create-form-label">
-          Email
-      <input className={validateEmail ? "create-patient-form-input invalid" : "create-patient-form-input"}
-            type="email"
-            value={registerFormData.email}
-            name="email"
-            onChange={handleChange}
-          />
-      </label>
+        <input className={validateLastName ? "create-patient-form-input invalid" : "create-patient-form-input"}
+          type="last_name"
+          value={registerFormData.last_name}
+          name="last_name"
+          onChange={handleChange}
+          placeholder="Last Name"
+        />
 
-      <label className="create-form-label">
-        Password
-      <input className={validatePassword ? "create-patient-form-input invalid" : "create-patient-form-input"}
+        { currentUser === "patient" ?
+          
+        <input className={validateDOB ? "create-patient-form-input invalid" : "create-patient-form-input"}
+          type="date_of_birth"
+          value={registerFormData.date_of_birth}
+          name="date_of_birth"
+          onChange={handleChange}
+          placeholder="Date of Birth (MM/DD/YYYY)"
+        />
+                  
+        :
+          
+        <>
+        </>
+          
+        }
+          
+        <input className={validateEmail ? "create-patient-form-input invalid" : "create-patient-form-input"}
+          type="email"
+          value={registerFormData.email}
+          name="email"
+          onChange={handleChange}
+          placeholder="Email"
+        />
+
+
+        <input className={validatePassword ? "create-patient-form-input invalid" : "create-patient-form-input"}
             type="password"
             value={registerFormData.password}
             name="password"
             onChange={handleChange}
-      />
-      </label>
+            placeholder="Password"
+        />
 
-      <button className="register-button" onClick={validateRegisterForm}>COMPLETE REGISTER</button>
+
+        <button className="register-form-button" onClick={validateRegisterForm}>REGISTER</button>
+
+      </div>
 
     </div>
   )

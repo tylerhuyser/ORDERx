@@ -180,15 +180,7 @@
     margin-bottom: 25px;
     padding: 5px;
   
-    background: transparent;
-    border: none;
-    border-bottom: white 1px solid;
-  
-    color: white;
     font-size: 24px;
-    letter-spacing: 4px;
-  
-    box-shadow: lightgrey 0px 5px 5px -6px;
   }
   
   .login-form-input::placeholder {
@@ -199,19 +191,11 @@
   }
 
   .sign-in-button, .register-button {
-
-    color: white;
-    background: #BCE3C5;
-
     font-size: 20px;
     
-    width: 125px;
+    width: 150px;
     margin: 10px;
     padding: 10px;
-  
-    border: 3px solid white;
-    border-radius: 18px;
-
   }
 
   .register-prompt-container {
