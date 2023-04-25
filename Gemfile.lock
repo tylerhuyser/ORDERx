@@ -172,7 +172,7 @@ DEPENDENCIES
   jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
-  puma (~> 4.1)
+  puma
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.4)
   spring
