@@ -1,6 +1,7 @@
 .home-container {
 
   width: calc(100% - 225px);
+  min-height: 100vh;
   height: 100%;
 
   display: flex;
@@ -8,6 +9,7 @@
   justify-content: center;
   align-items: center;
 
+  /* backdrop-filter: blur(10px); */
 }
 
 .unfilled-orders-container {
@@ -31,6 +33,7 @@
   color: #989898;
   letter-spacing: 4px;
   text-align: center;
+  font-weight: 900;
 
   margin: 5vh 0px 2vh 0px;
 
