@@ -121,3 +121,10 @@
   text-align: center;
   color: #989898;
 }
+
+@media only screen and (min-width: 1200px) { 
+  .order-card-container {
+    width: 80%;
+    max-width: 750px;
+  }
+}

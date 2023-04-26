@@ -1,5 +1,5 @@
 .search-container {
-  width: 60%;
+  width: calc(60% - 225px);
   margin: 5vh 0;
 
   display: flex;
@@ -45,4 +45,11 @@
 
 .search-button:focus {
   outline:none !important;
+}
+
+@media only screen and (min-width: 1200px) { 
+  .search-container {
+    width: 80%;
+    max-width: 750px;
+  }
 }
