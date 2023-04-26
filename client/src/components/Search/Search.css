@@ -1,5 +1,6 @@
 .search-container {
-  width: calc(60% - 225px);
+  width: calc(100% - 50px);
+  max-width: 500px;
   margin: 5vh 0;
 
   display: flex;
@@ -47,9 +48,9 @@
   outline:none !important;
 }
 
-@media only screen and (min-width: 1200px) { 
+@media only screen and (min-width: 1024px) { 
   .search-container {
-    width: 80%;
+    width: calc(100% - 275px);
     max-width: 750px;
   }
 }

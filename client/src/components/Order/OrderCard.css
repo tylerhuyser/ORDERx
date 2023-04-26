@@ -122,9 +122,9 @@
   color: #989898;
 }
 
-@media only screen and (min-width: 1200px) { 
+@media only screen and (min-width: 1024px) { 
   .order-card-container {
-    width: 80%;
+    width: 100%;
     max-width: 750px;
   }
 }

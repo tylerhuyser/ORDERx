@@ -67,6 +67,9 @@ function App() {
           const orderInfo = doctorData.orders
           setPatients(patientInfo)
           setOrders(orderInfo)
+
+          console.log(doctorData)
+          console.log(patientInfo)
           
           patientInfo.map((patient) => (patient.medications.map((medication) => (setMedications((prevState) => ([...prevState, medication]))))))
       
@@ -82,6 +85,8 @@ function App() {
           const orderInfo = patientData.orders
           setMedications(medicationInfo)
           setOrders(orderInfo)
+
+          console.log(patientData)
 
           orderInfo.map((order) => (
             setDoctors(prevState => ([...prevState, order.doctor]))
@@ -168,21 +173,33 @@ function App() {
 
       if (userCategory === 'doctor') {
 
-        const filteredPatients = patients.filter((patient) => (patient.first_name.toLowerCase().includes(e.target.value.toLowerCase()) || patient.last_name.toLowerCase().includes(e.target.value.toLowerCase()) ))
+        const filteredPatients = patients.filter((patient) => (patient.first_name.toLowerCase().includes(e.target.value.toLowerCase()) || patient.last_name.toLowerCase().includes(e.target.value.toLowerCase())))
+        
+        console.log(filteredPatients)
         
         const filteredMedications = medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase())))
 
+        console.log(filteredMedications)
+
         const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (filteredMedications.some(medication => (medication.id === order.medication_id))) || (filteredPatients.some(patient => (patient.id === order.patient_id)))))
+
+        console.log(newQueriedOrders)
 
         setQueriedOrders(newQueriedOrders)
 
       } else if (userCategory === 'patient') {
 
-        const filteredDoctors = doctors.filter((doctor) => (doctor.first_name.toLowerCase().includes(e.target.toLowerCase()) || doctor.last_name.toLowerCase().includes(e.target.toLowerCase())))
+        const filteredDoctors = doctors.filter((doctor) => (doctor.first_name.toLowerCase().includes(e.target.value.toLowerCase()) || doctor.last_name.toLowerCase().includes(e.target.value.toLowerCase())))
+
+        console.log(filteredDoctors)
         
         const filteredMedications = medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase())))
 
+        console.log(filteredMedications)
+
         const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (filteredMedications.some(medication => (medication.id === order.medication_id))) || (filteredDoctors.some(doctor => (doctor.id === order.doctor_id)))))
+
+        console.log(newQueriedOrders)
 
         setQueriedOrders(newQueriedOrders)
       }
