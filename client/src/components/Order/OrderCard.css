@@ -24,9 +24,9 @@
   height: 25%;
   padding: 25px;
   
-  background: white;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  /* background: white; */
+  /* border-top-left-radius: 12px;
+  border-top-right-radius: 12px; */
 
   color: #989898;
   letter-spacing: 4px;
@@ -48,7 +48,7 @@
   height: 55%;
   padding: 25px;
 
-  background: rgba(188,227,197, 1);
+  background: rgba(188,227,197, 0.5);
   border-top: solid #BCE3C5 1px;
   border-bottom: solid #BCE3C5 1px;
 
