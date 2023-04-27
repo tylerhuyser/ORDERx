@@ -18,6 +18,7 @@ export default function Home (props) {
 
   useEffect(() => {
     if (completeOrderList.length !== 0) {
+      console.log(completeOrderList)
       const gatherUnfilledOrders = (completeOrderList) => {
         const unfilledOrdersList = completeOrderList?.filter((order) => order.filled === false)
         setUnfilledOrders(unfilledOrdersList)

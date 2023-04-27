@@ -48,8 +48,10 @@ function App() {
       }
       else if ('doctor_id' in userData) {
         setUserCategory('patient')
+        localStorage.setItem('userCategory', 'patient')
       } else {
         setUserCategory('doctor')
+        localStorage.setItem('userCategory', 'doctor')
       }
     };
     handleVerify();
@@ -112,6 +114,8 @@ function App() {
     if (doctorData.error) {
       return
     } else {
+      localStorage.setItem('userCategory', 'doctor')
+      setUserCategory('doctor')
       setCurrentUser(doctorData);
       history.push("/home");
     }
@@ -122,6 +126,8 @@ function App() {
     if (doctorData.error) {
       return
     } else {
+      localStorage.setItem('userCategory', 'doctor')
+      setUserCategory('doctor')
       setCurrentUser(doctorData);
       history.push("/home");
     }
@@ -132,6 +138,8 @@ function App() {
     if (patientData.error) {
       return
     } else {
+      localStorage.setItem('userCategory', 'patient')
+      setUserCategory('patient')
       setCurrentUser(patientData);
       setIsCreated(!isCreated)
       history.push("/home");
@@ -143,6 +151,8 @@ function App() {
     if (patientData.error) {
       return
     } else {
+      localStorage.setItem('userCategory', 'patient')
+      setUserCategory('patient')
       setCurrentUser(patientData);
       setIsCreated(!isCreated)
       history.push("/home");
@@ -152,6 +162,7 @@ function App() {
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userCategory");
     localStorage.removeItem('doctors');
     localStorage.removeItem('patients');
     localStorage.removeItem('orders');

@@ -40,10 +40,12 @@ export default function MainContainer(props) {
       setOrders(orderJSON);
     }
     else if (user === 'patient') {
-      const medicationInfo = localStorage.getItem('medications')
-      setMedications(medicationInfo)
-      const orderInfo = localStorage.getItem('orders');
-      setOrders(orderInfo);
+      const medicationsSTRING = localStorage.getItem('medications')
+      const medicationsJSON = JSON.parse(medicationsSTRING)
+      setMedications(medicationsJSON)
+      const ordersInfo = localStorage.getItem('orders');
+      const ordersJSON = JSON.parse(ordersInfo)
+      setOrders(ordersJSON);
     }
 
   }, [userCategory])

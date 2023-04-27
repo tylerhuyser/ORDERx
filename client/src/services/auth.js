@@ -16,9 +16,12 @@ export const registerDoctor = async (registerData) => {
 
 export const verifyUser = async () => {
   const token = localStorage.getItem('authToken');
+  const userCategory = localStorage.getItem('userCategory')
   if (token) {
     api.defaults.headers.common.authorization = `Bearer ${token}`
+    api.defaults.headers.common['User-Category'] = `${userCategory}`
     const resp = await api.get('/auth/verify');
+    console.log(resp.data)
     return resp.data
   }
   return null
