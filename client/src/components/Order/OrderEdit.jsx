@@ -445,11 +445,11 @@ export default function OrderCreate (props) {
                   </select>
                 </label>
 
-                <label className="create-form-label" id="patient-form-radio">
+                <label className="create-form-label" id="patient-form-checkbox">
                     Add New Patient? 
                     <input
-                      type="radio"
-                      className="radio-input"
+                      type="checkbox"
+                      className="checkbox-input"
                       name="createPatient"
                       onClick={activatePatientForm}
                       defaultChecked={createPatient}
@@ -502,11 +502,11 @@ export default function OrderCreate (props) {
                     
                 <div className="create-medication-form-container">
 
-                    <label className="create-form-label" id="medication-form-radio">
+                    <label className="create-form-label" id="medication-form-checkbox">
                       Add New Medication? 
                       <input
-                        type="radio"
-                        className="radio-input"
+                        type="checkbox"
+                        className="checkbox-input"
                         name="createMedication"
                         onClick={activateMedicationForm}
                         defaultChecked={createMedication}
