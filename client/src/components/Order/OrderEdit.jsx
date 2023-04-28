@@ -35,7 +35,8 @@ export default function OrderCreate (props) {
   const { currentUser, userCategory, doctors, patients, currentOrder, setCurrentOrder, setEditOrder } = props
 
   const userID = currentUser.id
-  const currentDate = new Date()
+  const newDate = new Date()
+  const currentDate = (newDate.getMonth() + 1) + '/' + newDate.getDate() + '/' + newDate.getFullYear()
   const history = useHistory()
   
   const [orderFormData, setOrderFormData] = useState({
@@ -46,7 +47,7 @@ export default function OrderCreate (props) {
     patient_id: currentOrder.patient_id,
     doctor_id: currentOrder.doctor_id,
     pharmacy_address: currentOrder.pharmacy_address,
-    filled: false
+    filled: currentOrder.filled
 
   })
 
@@ -164,6 +165,14 @@ export default function OrderCreate (props) {
         [name]: value
       }))
     }
+  }
+
+  const handeChangeOrderFilledStatus = (e) => {
+    let { name } = e.target;
+    setOrderFormData(prevState => ({
+      ...prevState,
+      [name]: !prevState.filled
+    }))
   }
    
 // Handle Submit Functions
@@ -461,12 +470,12 @@ export default function OrderCreate (props) {
                   {createPatient ?
                         
                     <PatientCreate patientFormData={patientFormData}
-                                   validatePatientFirstName={validatePatientFirstName}
-                                   validatePatientLastName={validatePatientLastName}
-                                   validatePatientDOB={validatePatientDOB}
-                                   validatePatientEmail={validatePatientEmail}
-                                   validatePatientPassword={validatePatientPassword}
-                                   handleChangePatient={handleChangePatient}
+                      validatePatientFirstName={validatePatientFirstName}
+                      validatePatientLastName={validatePatientLastName}
+                      validatePatientDOB={validatePatientDOB}
+                      validatePatientEmail={validatePatientEmail}
+                      validatePatientPassword={validatePatientPassword}
+                      handleChangePatient={handleChangePatient}
                     />
                   
                   :
@@ -538,12 +547,32 @@ export default function OrderCreate (props) {
             <label className="create-form-label">
               Pharmacy Address
               <input className={validatePharmacyAddress ? "create-order-form-input invalid" : "create-order-form-input"}
-                    type="pharmacy_address"
-                    value={orderFormData.pharmacy_address}
-                    name="pharmacy_address"
-                    onChange={handleChangeOrder}
+                type="pharmacy_address"
+                value={orderFormData.pharmacy_address}
+                name="pharmacy_address"
+                onChange={handleChangeOrder}
               />
             </label>
+
+            {(userCategory && userCategory === 'doctor') ?
+              <label className='create-form-label'>
+                Order Filled?
+                <input
+                  type="checkbox"
+                  className="checkbox-input"
+                  name="filled"
+                  value={orderFormData.filled}
+                  onChange={handeChangeOrderFilledStatus}
+                  
+                />
+              </label>
+
+              :
+
+              <>
+              </>
+
+            }
 
             <button className="submit-button" id="create-order-form-button">SUBMIT</button>
 

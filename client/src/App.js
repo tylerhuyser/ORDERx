@@ -100,7 +100,14 @@ function App() {
       }
 
     }
-  }, [currentUser, userCategory, isCreated, isDeleted])
+  }, [currentUser, userCategory])
+
+  useEffect(() => {
+    if (currentUser && userCategory && (isCreated === true || isDeleted === true)) {
+      console.log('Useffecrt #3 - Gathering from API due to OrderCreate, OrderEdit, or OrderDelete')
+      getUserDataFromAPI(currentUser, userCategory)
+    }
+  }, [isCreated, isDeleted])
   
 
 // Functions
@@ -196,6 +203,7 @@ function App() {
       localStorage.setItem('medications', JSON.stringify(medicationsData))
 
       setIsCreated(false)
+      setIsDeleted(false)
       
     } else if (currentUser && userCategory === "patient") {
 
@@ -221,6 +229,7 @@ function App() {
       localStorage.setItem('doctors', JSON.stringify(doctorsData))
       
       setIsCreated(false)
+      setIsDeleted(false)
     }
   }
 

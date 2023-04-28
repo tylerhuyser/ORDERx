@@ -35,7 +35,7 @@ export default function OrderCreate (props) {
 
   const userID = currentUser.id
   const newDate = new Date()
-  const currentDate = (newDate.getMonth()+1) + '/' + newDate.getDate()
+  const currentDate = (newDate.getMonth() + 1) + '/' + newDate.getDate() + '/' + newDate.getFullYear()
   const history = useHistory()
   
   const [orderFormData, setOrderFormData] = useState({
