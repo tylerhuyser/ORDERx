@@ -101,66 +101,14 @@ function App() {
         setMedications(JSON.parse(stringifiedMedicationData))
    
       } else {
+
         getUserDataFromAPI(currentUser, userCategory)
+        
       }
 
     }
   }, [currentUser, userCategory, isCreated, isDeleted])
   
-  // useEffect(() => {
-  //   if ((currentUser !== null) && (userCategory !== "")) {
-  //     console.log('UseEffect #2')
-  //     const userID = currentUser.id
-    
-  //     const getUserData = async (userID) => {
-
-  //       if (userCategory === "doctor") {
-
-  //         console.log('UseEffect #2 - Loading Doctor Information')
-
-  //         const doctorData = await getOneDoctor(userID)
-  //         const patientInfo = doctorData.patients
-  //         const orderInfo = doctorData.orders
-  //         setPatients(patientInfo)
-  //         setOrders(orderInfo)
-
-  //         console.log(doctorData)
-  //         console.log(patientInfo)
-          
-  //         patientInfo.map((patient) => (patient.medications.map((medication) => (setMedications((prevState) => ([...prevState, medication]))))))
-      
-  //         setQueriedOrders(orderInfo)
-  //         setIsCreated(false)
-  //         localStorage.setItem('patients', JSON.stringify(patientInfo))
-  //         localStorage.setItem('orders', JSON.stringify(orderInfo))
-  //         localStorage.setItem('medications', JSON.stringify(medications))
-
-  //       } else if (userCategory === "patient") {
-
-  //         console.log('UseEffect #2 - Loading Patient Information')
-
-  //         const patientData = await getOnePatient(userID)
-  //         const medicationInfo = patientData.medications
-  //         const orderInfo = patientData.orders
-  //         setMedications(medicationInfo)
-  //         setOrders(orderInfo)
-
-  //         console.log(patientData)
-
-  //         orderInfo.map((order) => (
-  //           setDoctors(prevState => ([...prevState, order.doctor]))
-  //         ))
-
-  //         setQueriedOrders(orderInfo)
-  //         setIsCreated(false)
-  //         localStorage.setItem('medications', JSON.stringify(medicationInfo))
-  //         localStorage.setItem('orders', JSON.stringify(orderInfo))
-  //         localStorage.setItem('doctors', JSON.stringify(doctors))
-  //       };
-  //     }
-  //     getUserData(userID);
-  //   }
-  // }, [currentUser, isCreated, isDeleted])
 
 // Functions
 
