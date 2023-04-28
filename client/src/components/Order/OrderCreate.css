@@ -55,6 +55,7 @@
   width: 50px;
   color: #BCE3C5;
   font-size: 50px;
+  margin-right: 50px;
 }
 
 .create-order-form-title {
@@ -70,7 +71,7 @@
 
 .placeholder-div {
 
-  width: 50px;
+  width: 100px;
 
 }
 
@@ -116,7 +117,10 @@
   display: flex;
   flex-direction: column;
   letter-spacing: 2px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
+
+  font-weight: 500;
+  font-size: 24px;
 
 }
 
@@ -125,8 +129,9 @@
   width: 100%;
   border: none;
   padding: 5px;
-  margin-top: 15px;
+  margin-top: 25px;
 
+  font-size: 24px;
   color: #989898;
   letter-spacing: 4px;
 
@@ -146,16 +151,24 @@
 }
 
 .submit-button {
-
-  width: 100px;
-  color: #BCE3C5;
-  background: transparent;
+    
+  width: 300px;
   margin: 25px;
-  padding: 10px;
+  padding: 10px 25px;
 
-  border: 3px solid #BCE3C5;
+  background-color: white;
+  border: 5px solid #BCE3C5;
   border-radius: 18px;
+ 
+  font-size: 30px;
+  color: #BCE3C5;
+  font-weight: 900;
 
+}
+
+.submit-button:hover {
+  background-color: #BCE3C5;
+  color: white;
 }
 
 .create-patient-form-container, .create-mediction-form-container {
