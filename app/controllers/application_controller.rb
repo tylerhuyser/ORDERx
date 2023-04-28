@@ -42,32 +42,4 @@ class ApplicationController < ActionController::API
     return @user
   end
 
-  # def determine_user_model(props)
-  #   @decoded = props
-  #   if Doctor.exists?(@decoded)
-  #     @user = Doctor.find(@decoded)
-  #     puts 'here 1'
-  #   elsif Patient.exists?(@decoded)
-  #     @user = Patient.find(@decoded)
-  #     puts 'here 2'
-  #   else
-  #     puts 'no user'
-  #   end
-  #   return @user
-  # end
-
-  # def determine_user_model(props)
-  #   @decoded = props
-  #   puts @decoded
-  #   if Doctor.exists?(@decoded)
-  #     @user = Patient.find(@decoded)
-  #     puts 'here 2'
-  #   else
-  #     @user = Doctor.find(@decoded)
-  #     puts 'here 1'
-  #   end
-  #   return @user
-  # end
-
-
 end
