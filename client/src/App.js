@@ -40,6 +40,9 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+
+    console.log('UseEffect #1 - Auth/Verify User')
+
     const handleVerify = async () => {
       const userData = await verifyUser();
       setCurrentUser(userData);
@@ -47,63 +50,117 @@ function App() {
         history.push("/");
       }
       else if ('doctor_id' in userData) {
+
+        console.log('UseEffect #1 - PATIENT Verified')
+
         setUserCategory('patient')
         localStorage.setItem('userCategory', 'patient')
       } else {
+
+        console.log('UseEffect #1 - DOCTOR Verified')
+
         setUserCategory('doctor')
         localStorage.setItem('userCategory', 'doctor')
       }
     };
     handleVerify();
   }, []);
-  
+
   useEffect(() => {
-    if ((currentUser !== null) && (userCategory !== "")) {
-      const userID = currentUser.id
-    
-      const getUserData = async (userID) => {
 
-        if (userCategory === "doctor") {
-          const doctorData = await getOneDoctor(userID)
-          const patientInfo = doctorData.patients
-          const orderInfo = doctorData.orders
-          setPatients(patientInfo)
-          setOrders(orderInfo)
+    console.log('UseEffect #2')
+    console.log(currentUser)
+    console.log(userCategory)
 
-          console.log(doctorData)
-          console.log(patientInfo)
-          
-          patientInfo.map((patient) => (patient.medications.map((medication) => (setMedications((prevState) => ([...prevState, medication]))))))
-      
-          setQueriedOrders(orderInfo)
-          setIsCreated(false)
-          localStorage.setItem('patients', JSON.stringify(patientInfo))
-          localStorage.setItem('orders', JSON.stringify(orderInfo))
-          localStorage.setItem('medications', JSON.stringify(medications))
+    if (currentUser && currentUser !== null && userCategory !== "" && (userCategory === "doctor" || userCategory === "patient")) {
 
-        } else if (userCategory === "patient") {
-          const patientData = await getOnePatient(userID)
-          const medicationInfo = patientData.medications
-          const orderInfo = patientData.orders
-          setMedications(medicationInfo)
-          setOrders(orderInfo)
+      const stringifiedPatientData = localStorage.getItem('patients');
+      const stringifiedDoctorData = localStorage.getItem('doctors');
+      const stringifiedOrderData = localStorage.getItem('orders');
+      const stringifiedMedicationData = localStorage.getItem('medications');
 
-          console.log(patientData)
+      console.log(stringifiedPatientData !== null)
+      console.log(stringifiedDoctorData !== null)
+      console.log(stringifiedOrderData !== null)
+      console.log(stringifiedMedicationData !== null)
 
-          orderInfo.map((order) => (
-            setDoctors(prevState => ([...prevState, order.doctor]))
-          ))
+      if (userCategory === "doctor" && stringifiedPatientData && stringifiedOrderData && stringifiedMedicationData) {
 
-          setQueriedOrders(orderInfo)
-          setIsCreated(false)
-          localStorage.setItem('medications', JSON.stringify(medicationInfo))
-          localStorage.setItem('orders', JSON.stringify(orderInfo))
-          localStorage.setItem('doctors', JSON.stringify(doctors))
-        };
+        console.log('UseEffect #2 - LocalStorage - DOCTOR info')
+
+        setPatients(JSON.parse(stringifiedPatientData))
+        setOrders(JSON.parse(stringifiedOrderData))
+        setMedications(JSON.parse(stringifiedMedicationData))
+  
+      } else if (userCategory === "patient" && stringifiedDoctorData && stringifiedOrderData && stringifiedMedicationData) {
+
+        console.log('UseEffect #2 - LocalStorage - PATIENT info')
+  
+        setDoctors(JSON.parse(stringifiedDoctorData))
+        setOrders(JSON.parse(stringifiedOrderData))
+        setMedications(JSON.parse(stringifiedMedicationData))
+   
+      } else {
+        getUserDataFromAPI(currentUser, userCategory)
       }
-      getUserData(userID);
+
     }
-  }, [currentUser, isCreated, isDeleted])
+  }, [currentUser, userCategory, isCreated, isDeleted])
+  
+  // useEffect(() => {
+  //   if ((currentUser !== null) && (userCategory !== "")) {
+  //     console.log('UseEffect #2')
+  //     const userID = currentUser.id
+    
+  //     const getUserData = async (userID) => {
+
+  //       if (userCategory === "doctor") {
+
+  //         console.log('UseEffect #2 - Loading Doctor Information')
+
+  //         const doctorData = await getOneDoctor(userID)
+  //         const patientInfo = doctorData.patients
+  //         const orderInfo = doctorData.orders
+  //         setPatients(patientInfo)
+  //         setOrders(orderInfo)
+
+  //         console.log(doctorData)
+  //         console.log(patientInfo)
+          
+  //         patientInfo.map((patient) => (patient.medications.map((medication) => (setMedications((prevState) => ([...prevState, medication]))))))
+      
+  //         setQueriedOrders(orderInfo)
+  //         setIsCreated(false)
+  //         localStorage.setItem('patients', JSON.stringify(patientInfo))
+  //         localStorage.setItem('orders', JSON.stringify(orderInfo))
+  //         localStorage.setItem('medications', JSON.stringify(medications))
+
+  //       } else if (userCategory === "patient") {
+
+  //         console.log('UseEffect #2 - Loading Patient Information')
+
+  //         const patientData = await getOnePatient(userID)
+  //         const medicationInfo = patientData.medications
+  //         const orderInfo = patientData.orders
+  //         setMedications(medicationInfo)
+  //         setOrders(orderInfo)
+
+  //         console.log(patientData)
+
+  //         orderInfo.map((order) => (
+  //           setDoctors(prevState => ([...prevState, order.doctor]))
+  //         ))
+
+  //         setQueriedOrders(orderInfo)
+  //         setIsCreated(false)
+  //         localStorage.setItem('medications', JSON.stringify(medicationInfo))
+  //         localStorage.setItem('orders', JSON.stringify(orderInfo))
+  //         localStorage.setItem('doctors', JSON.stringify(doctors))
+  //       };
+  //     }
+  //     getUserData(userID);
+  //   }
+  // }, [currentUser, isCreated, isDeleted])
 
 // Functions
 
@@ -168,9 +225,95 @@ function App() {
     localStorage.removeItem('orders');
     localStorage.removeItem('medications')
     removeToken();
+    setSearchQuery("")
     setUserCategory(false)
     history.push("/");
   };
+
+  //  Access LocalStorage Data
+
+  function gatherUserDataFromLocalStorage() {
+
+    const stingifiedPatientData = localStorage.getItem('patients');
+    const stringifiedDoctorData = localStorage.getItem('doctors');
+    const stringifiedOrderData = localStorage.getItem('orders');
+    const stringifiedMedicationData = localStorage.getItem('medications');
+
+    if (currentUser === "doctor" && stingifiedPatientData && stringifiedOrderData && stringifiedMedicationData) {
+
+      setPatients(JSON.parse(stingifiedPatientData))
+      setOrders(JSON.parse(stringifiedOrderData))
+      setMedications(JSON.parse(stringifiedMedicationData))
+
+    } else if (currentUser === "doctor") {
+
+    } else if (currentUser === "patient" && stringifiedDoctorData && stringifiedOrderData && stringifiedMedicationData) {
+
+      setDoctors(JSON.parse(stringifiedDoctorData))
+      setOrders(JSON.parse(stringifiedOrderData))
+      setMedications(JSON.parse(stringifiedMedicationData))
+
+    } else if (currentUser === "patient") {
+
+      
+    }
+  }
+
+  async function getUserDataFromAPI(currentUser, userCategory) {
+    if (currentUser && userCategory === "doctor") {
+
+      console.log('UseEffect #2 - API Call - DOCTOR')
+
+      const doctorData = await getOneDoctor(currentUser.id)
+      const patientInfo = doctorData.patients
+      const orderInfo = doctorData.orders
+      setPatients(patientInfo)
+      setOrders(orderInfo)
+
+      console.log(doctorData)
+      console.log(patientInfo)
+
+      const medicationsData = []
+      patientInfo.map((patient) => (patient.medications.map((medication) => (medicationsData.push(medication)))))
+      setMedications(medicationsData)
+  
+      setQueriedOrders(orderInfo)
+      setIsCreated(false)
+      localStorage.setItem('patients', JSON.stringify(patientInfo))
+      localStorage.setItem('orders', JSON.stringify(orderInfo))
+      localStorage.setItem('medications', JSON.stringify(medicationsData))
+      
+    } else if (currentUser && userCategory === "patient") {
+
+      console.log('UseEffect #2 - API Call - PATIENT')
+
+      const patientData = await getOnePatient(currentUser.id)
+      const medicationInfo = patientData.medications
+      const orderInfo = patientData.orders
+      setMedications(medicationInfo)
+      setOrders(orderInfo)
+
+      console.log(patientData)
+
+      const doctorsData = []
+
+      // orderInfo.map((order) => (
+      //   setDoctors(prevState => ([...prevState, order.doctor]))
+      // ))
+
+      orderInfo.map((order) => (
+        doctorsData.push(order.doctor)
+      ))
+      setDoctors(doctorsData)
+
+      setQueriedOrders(orderInfo)
+      setIsCreated(false)
+      localStorage.setItem('medications', JSON.stringify(medicationInfo))
+      localStorage.setItem('orders', JSON.stringify(orderInfo))
+      localStorage.setItem('doctors', JSON.stringify(doctorsData))
+
+    }
+  }
 
 // Search Function
   
@@ -236,7 +379,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
         </Layout>
       }
 
