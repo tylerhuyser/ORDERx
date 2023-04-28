@@ -69,8 +69,6 @@ function App() {
   useEffect(() => {
 
     console.log('UseEffect #2')
-    console.log(currentUser)
-    console.log(userCategory)
 
     if (currentUser && currentUser !== null && userCategory !== "" && (userCategory === "doctor" || userCategory === "patient")) {
 
@@ -78,11 +76,6 @@ function App() {
       const stringifiedDoctorData = localStorage.getItem('doctors');
       const stringifiedOrderData = localStorage.getItem('orders');
       const stringifiedMedicationData = localStorage.getItem('medications');
-
-      console.log(stringifiedPatientData !== null)
-      console.log(stringifiedDoctorData !== null)
-      console.log(stringifiedOrderData !== null)
-      console.log(stringifiedMedicationData !== null)
 
       if (userCategory === "doctor" && stringifiedPatientData && stringifiedOrderData && stringifiedMedicationData) {
 
@@ -103,7 +96,7 @@ function App() {
       } else {
 
         getUserDataFromAPI(currentUser, userCategory)
-        
+
       }
 
     }
@@ -178,34 +171,7 @@ function App() {
     history.push("/");
   };
 
-  //  Access LocalStorage Data
-
-  function gatherUserDataFromLocalStorage() {
-
-    const stingifiedPatientData = localStorage.getItem('patients');
-    const stringifiedDoctorData = localStorage.getItem('doctors');
-    const stringifiedOrderData = localStorage.getItem('orders');
-    const stringifiedMedicationData = localStorage.getItem('medications');
-
-    if (currentUser === "doctor" && stingifiedPatientData && stringifiedOrderData && stringifiedMedicationData) {
-
-      setPatients(JSON.parse(stingifiedPatientData))
-      setOrders(JSON.parse(stringifiedOrderData))
-      setMedications(JSON.parse(stringifiedMedicationData))
-
-    } else if (currentUser === "doctor") {
-
-    } else if (currentUser === "patient" && stringifiedDoctorData && stringifiedOrderData && stringifiedMedicationData) {
-
-      setDoctors(JSON.parse(stringifiedDoctorData))
-      setOrders(JSON.parse(stringifiedOrderData))
-      setMedications(JSON.parse(stringifiedMedicationData))
-
-    } else if (currentUser === "patient") {
-
-      
-    }
-  }
+  // API CALL
 
   async function getUserDataFromAPI(currentUser, userCategory) {
     if (currentUser && userCategory === "doctor") {
@@ -213,53 +179,48 @@ function App() {
       console.log('UseEffect #2 - API Call - DOCTOR')
 
       const doctorData = await getOneDoctor(currentUser.id)
-      const patientInfo = doctorData.patients
-      const orderInfo = doctorData.orders
-      setPatients(patientInfo)
-      setOrders(orderInfo)
 
-      console.log(doctorData)
-      console.log(patientInfo)
+      const patientInfo = doctorData.patients
+      setPatients(patientInfo)
+
+      const orderInfo = doctorData.orders
+      setOrders(orderInfo)
+      setQueriedOrders(orderInfo)
 
       const medicationsData = []
       patientInfo.map((patient) => (patient.medications.map((medication) => (medicationsData.push(medication)))))
       setMedications(medicationsData)
-  
-      setQueriedOrders(orderInfo)
-      setIsCreated(false)
+
       localStorage.setItem('patients', JSON.stringify(patientInfo))
       localStorage.setItem('orders', JSON.stringify(orderInfo))
       localStorage.setItem('medications', JSON.stringify(medicationsData))
+
+      setIsCreated(false)
       
     } else if (currentUser && userCategory === "patient") {
 
       console.log('UseEffect #2 - API Call - PATIENT')
 
       const patientData = await getOnePatient(currentUser.id)
-      const medicationInfo = patientData.medications
-      const orderInfo = patientData.orders
-      setMedications(medicationInfo)
-      setOrders(orderInfo)
 
-      console.log(patientData)
+      const medicationInfo = patientData.medications
+      setMedications(medicationInfo)
+
+      const orderInfo = patientData.orders
+      setOrders(orderInfo)
+      setQueriedOrders(orderInfo)
 
       const doctorsData = []
-
-      // orderInfo.map((order) => (
-      //   setDoctors(prevState => ([...prevState, order.doctor]))
-      // ))
-
       orderInfo.map((order) => (
         doctorsData.push(order.doctor)
       ))
       setDoctors(doctorsData)
 
-      setQueriedOrders(orderInfo)
-      setIsCreated(false)
       localStorage.setItem('medications', JSON.stringify(medicationInfo))
       localStorage.setItem('orders', JSON.stringify(orderInfo))
       localStorage.setItem('doctors', JSON.stringify(doctorsData))
-
+      
+      setIsCreated(false)
     }
   }
 
@@ -276,32 +237,16 @@ function App() {
       if (userCategory === 'doctor') {
 
         const filteredPatients = patients.filter((patient) => (patient.first_name.toLowerCase().includes(e.target.value.toLowerCase()) || patient.last_name.toLowerCase().includes(e.target.value.toLowerCase())))
-        
-        console.log(filteredPatients)
-        
         const filteredMedications = medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase())))
-
-        console.log(filteredMedications)
-
         const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (filteredMedications.some(medication => (medication.id === order.medication_id))) || (filteredPatients.some(patient => (patient.id === order.patient_id)))))
-
-        console.log(newQueriedOrders)
 
         setQueriedOrders(newQueriedOrders)
 
       } else if (userCategory === 'patient') {
 
         const filteredDoctors = doctors.filter((doctor) => (doctor.first_name.toLowerCase().includes(e.target.value.toLowerCase()) || doctor.last_name.toLowerCase().includes(e.target.value.toLowerCase())))
-
-        console.log(filteredDoctors)
-        
         const filteredMedications = medications.filter((medication) => (medication.name.toLowerCase().includes(e.target.value.toLowerCase())))
-
-        console.log(filteredMedications)
-
         const newQueriedOrders = orders.filter((order) => ((order.pharmacy_address.toLowerCase().includes(e.target.value.toLowerCase())) || (order.date.toLowerCase().includes(e.target.value.toLowerCase())) || (filteredMedications.some(medication => (medication.id === order.medication_id))) || (filteredDoctors.some(doctor => (doctor.id === order.doctor_id)))))
-
-        console.log(newQueriedOrders)
 
         setQueriedOrders(newQueriedOrders)
       }
@@ -327,7 +272,7 @@ function App() {
         :
 
         <Layout currentUser={currentUser} handleLogout={handleLogout}>
-          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} setDoctors={setDoctors} patients={patients} setPatients={setPatients} medications={medications} setMedications={setMedications} orders={orders} setOrders={setOrders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
+          <MainContainer currentUser={currentUser} userCategory={userCategory} doctors={doctors} patients={patients} medications={medications} orders={orders} queriedOrders={queriedOrders} searchQuery={searchQuery} isCreated={isCreated} setIsCreated={setIsCreated} handleSearch={handleSearch} completeOrderList={orders} isDeleted={isDeleted} setIsDeleted={setIsDeleted} />
         </Layout>
       }
 

@@ -18,43 +18,10 @@ export default function MainContainer(props) {
 
   const { isCreated, setIsCreated } = props;
   const { currentUser, userCategory } = props;
-  const { doctors, setDoctors } = props;
-  const { patients, setPatients } = props;
-  const { medications, setMedications } = props;
-  const { orders, completeOrderList, setOrders } = props;
-  const { queriedOrders } = props;
-  const { searchQuery} = props;
-  const { handleSearch } = props;
+  const { doctors, patients, medications, orders, queriedOrders, completeOrderList } = props;
+  const { searchQuery, handleSearch } = props;
   const { isDeleted, setIsDeleted } = props;
   const history = useHistory()
-
-  // useEffect(() => {
-  //   const user = userCategory
-
-  //   if (user === 'doctor') {
-  //     const patientSTRING = localStorage.getItem('patients');
-  //     const patientJSON = JSON.parse(patientSTRING)
-  //     setPatients(patientJSON);
-  //     const medicationsSTRING = localStorage.getItem('medications')
-  //     const medicationsJSON = JSON.parse(medicationsSTRING)
-  //     setMedications(medicationsJSON)
-  //     const orderSTRING = localStorage.getItem('orders');
-  //     const orderJSON = JSON.parse(orderSTRING)
-  //     setOrders(orderJSON);
-  //   }
-  //   else if (user === 'patient') {
-  //     const doctorsSTRING = localStorage.getItem('doctors')
-  //     const doctorsJSON = JSON.parse(doctorsSTRING)
-  //     setDoctors(doctorsJSON)
-  //     const medicationsSTRING = localStorage.getItem('medications')
-  //     const medicationsJSON = JSON.parse(medicationsSTRING)
-  //     setMedications(medicationsJSON)
-  //     const ordersInfo = localStorage.getItem('orders');
-  //     const ordersJSON = JSON.parse(ordersInfo)
-  //     setOrders(ordersJSON);
-  //   }
-
-  // }, [userCategory])
 
   const deleteOrder = async (id) => {
     await destroyOrder(id)
