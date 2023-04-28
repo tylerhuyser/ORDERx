@@ -182,7 +182,7 @@
 
 }
 
-#patient-form-radio, #medication-form-radio {
+#patient-form-checkbox, #medication-form-checkbox {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -193,7 +193,7 @@
   font-style: italic;
 }
 
-.radio-input {
+.checkbox-input {
   margin-left: 25px;
   outline: none; 
   background-color: #BCE3C5;
