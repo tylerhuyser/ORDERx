@@ -192,7 +192,7 @@ function App() {
 
       const orderInfo = doctorData.orders
       setOrders(orderInfo)
-      setQueriedOrders(orderInfo)
+      setQueriedOrders(orderInfo) 
 
       const medicationsData = []
       patientInfo.map((patient) => (patient.medications.map((medication) => (medicationsData.push(medication)))))
