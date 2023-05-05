@@ -46,7 +46,8 @@
 
 .doctor-login-subtitle, .patient-login-subtitle {
   font-weight: 300;
-  font-size: 36px;margin: 15px 0px 50px 0px;
+  font-size: 36px;
+  margin: 15px 0px 50px 0px;
 }
 
 .login-router-button {
