@@ -29,7 +29,13 @@ export default function Layout (props) {
         {props.children}
       </div>
 
-      <Footer />
+      {currentUser ?
+        
+        <Footer />
+        :
+        <></>
+      }
+
     </div>
   )
 }
