@@ -1,7 +1,7 @@
 .footer-container {
   display: none;
 }
-
+ 
 .slide-in-bottom-nav {
 	-webkit-animation: slide-in-bottom 0.5s ease-out both;
 	        animation: slide-in-bottom 0.5s ease-out both;
