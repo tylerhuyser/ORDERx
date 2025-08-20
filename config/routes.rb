@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/patients/:patient_id/medications', to: 'medications#index'
   get '/patients/:patient_id/orders', to: 'orders#index'
   get 'orders/:order_id/medications', to: 'medications#index'
+  get "/up", to: ->(_) { [200, {}, ["OK"]] }
 
 
   resources :patients
